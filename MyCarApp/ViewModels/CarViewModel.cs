@@ -13,8 +13,6 @@ namespace MyCarApp.ViewModels
     {
         public ObservableCollection<CarModel> Cars { get; set; } = new ObservableCollection<CarModel>();
 
-        private ObservableCollection<CarModel> _cars = new ObservableCollection<CarModel>();
-
 
 
         [RelayCommand]
@@ -23,14 +21,12 @@ namespace MyCarApp.ViewModels
             var carList = await _carService.GetCarList();
 
             Cars.Clear();
-            _cars.Clear();
 
             if (carList != null && carList.Count > 0)
             {
                 foreach (var car in carList)
                 {
                     Cars.Add(car);
-                    _cars.Add(car);
                 }
             }
         }

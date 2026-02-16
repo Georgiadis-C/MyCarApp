@@ -1,4 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
+using MyCarApp.Interfaces;
+using MyCarApp.Services;
+using MyCarApp.ViewModels;
+using MyCarApp.Views;
 
 namespace MyCarApp
 {
@@ -16,17 +20,17 @@ namespace MyCarApp
                 });
 
             // ViewModels
-            builder.Services.AddSingleton<ViewModels.CarKmViewModel>();
-            builder.Services.AddSingleton<ViewModels.CarMaintainViewModel>();
-            builder.Services.AddSingleton<ViewModels.CarViewModel>();
+            builder.Services.AddSingleton<CarKmViewModel>();
+            builder.Services.AddSingleton<CarMaintainViewModel>();
+            builder.Services.AddSingleton<CarViewModel>();
 
             // Views
-            builder.Services.AddSingleton<Views.CarKmPage>();
-            builder.Services.AddSingleton<Views.CarMaintainPage>();
-            builder.Services.AddSingleton<Views.CarPage>();
+            builder.Services.AddSingleton<CarKmPage>();
+            builder.Services.AddSingleton<CarMaintainPage>();
+            builder.Services.AddSingleton<CarPage>();
 
             //Services
-
+            builder.Services.AddSingleton<ICarService,CarService>();
 
 #if DEBUG
             builder.Logging.AddDebug();

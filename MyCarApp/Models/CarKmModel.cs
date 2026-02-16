@@ -11,5 +11,7 @@ namespace MyCarApp.Models
         public int Id { get; set; }
 
         public double Kilometers { get; set; }
+
+        public int CarId { get; set; }
     }
 }
