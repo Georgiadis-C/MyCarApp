@@ -7,9 +7,9 @@ namespace MyCarApp.Interfaces
 {
     public interface ICarService
     {
-        Task<List<CarModel>> GetCarList();
+        Task<List<CarsModel>> GetCarList();
 
-        Task SaveCar(CarModel carModel);
-        Task DeleteCar(CarModel carModel);
+        Task SaveCar(CarsModel carModel);
+        Task DeleteCar(CarsModel carModel);
     }
 }

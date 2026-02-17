@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyCarApp.Views.CarsPage"
+             xmlns:local="clr-namespace:MyCarApp.ViewModels"
+             x:DataType="local:CarsViewModel"
+             xmlns:models="clr-namespace:MyCarApp.Models"
+             Title="CarsPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding GoToAddCarCommand}" Text="Add Car" />
+    </ContentPage.ToolbarItems>
+    <CollectionView ItemsSource="{Binding Cars}" SelectionMode="None">
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:CarsModel">
+                <Grid Padding="10,5">
+                    <Border Stroke="#E0E0E0"
+                        StrokeThickness="1"
+                        Padding="15"
+                        BackgroundColor="White">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12"/>
+                        </Border.StrokeShape>
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer 
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type local:CarsViewModel}}, Path=SelectCarCommand}"
+                            CommandParameter="{Binding .}"/>
+                        </Border.GestureRecognizers>
+                        <HorizontalStackLayout Spacing="15">
+                            <Label Text="🚗" FontSize="24" VerticalOptions="Center"/>
+
+                            <Label Text="{Binding Brand}" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               VerticalOptions="Center"/>
+
+                            <Label Text="{Binding Model}" 
+                               FontSize="18" 
+                               VerticalOptions="Center"/>
+
+                            <Label Text="{Binding Year, StringFormat='({0})'}" 
+                               FontSize="14" 
+                               TextColor="Gray" 
+                               VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </Border>
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

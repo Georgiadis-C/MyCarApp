@@ -21,31 +21,31 @@ namespace MyCarApp.Services
             {
                 string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Car.db3");
                 _dbConnection = new SQLiteAsyncConnection(dbPath);
-                await _dbConnection.CreateTableAsync<CarModel>();
+                await _dbConnection.CreateTableAsync<CarsModel>();
             }
         }
 
-        public async Task<List<CarModel>> GetCarList()
+        public async Task<List<CarsModel>> GetCarList()
         {
-            var CarList = await _dbConnection.Table<CarModel>().ToListAsync();
+            var CarList = await _dbConnection.Table<CarsModel>().ToListAsync();
             return CarList;
         }
 
-        public async Task SaveCar (CarModel carModel)
+        public async Task SaveCar (CarsModel carsModel)
         {
-            if (carModel.CarId == 0)
+            if (carsModel.CarId == 0)
             {
-                await _dbConnection.InsertAsync(carModel);
+                await _dbConnection.InsertAsync(carsModel);
             }
             else
             {
-                await _dbConnection.UpdateAsync(carModel);
+                await _dbConnection.UpdateAsync(carsModel);
             }
         }
 
-        public async Task DeleteCar(CarModel carModel)
+        public async Task DeleteCar(CarsModel carsModel)
         {
-            await _dbConnection.DeleteAsync(carModel);
+            await _dbConnection.DeleteAsync(carsModel);
         }
     }
 }

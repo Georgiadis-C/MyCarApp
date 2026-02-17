@@ -22,12 +22,16 @@ namespace MyCarApp
             // ViewModels
             builder.Services.AddSingleton<CarKmViewModel>();
             builder.Services.AddSingleton<CarMaintainViewModel>();
-            builder.Services.AddSingleton<CarViewModel>();
+            builder.Services.AddSingleton<CarsViewModel>();
+            builder.Services.AddSingleton<AddCarViewModel>();
+            builder.Services.AddSingleton<CarDetailsViewModel>();
 
             // Views
             builder.Services.AddSingleton<CarKmPage>();
             builder.Services.AddSingleton<CarMaintainPage>();
-            builder.Services.AddSingleton<CarPage>();
+            builder.Services.AddSingleton<CarsPage>();
+            builder.Services.AddSingleton<AddCarPage>();
+            builder.Services.AddSingleton<CarDetailsPage>();
 
             //Services
             builder.Services.AddSingleton<ICarService,CarService>();

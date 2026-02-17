@@ -1,10 +1,15 @@
-﻿namespace MyCarApp
+﻿using MyCarApp.Views;
+namespace MyCarApp
+
 {
     public partial class AppShell : Shell
     {
         public AppShell()
         {
             InitializeComponent();
+
+            Routing.RegisterRoute(nameof(AddCarPage), typeof(AddCarPage));
+            Routing.RegisterRoute(nameof(CarDetailsPage), typeof(CarDetailsPage));
         }
     }
 }

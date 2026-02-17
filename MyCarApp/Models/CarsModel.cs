@@ -6,7 +6,7 @@ using SQLite;
 
 namespace MyCarApp.Models
 {
-    public class CarModel
+    public class CarsModel
     {
         [PrimaryKey, AutoIncrement]
         public int CarId { get; set; }
