@@ -4,8 +4,9 @@ namespace MyCarApp.Views;
 
 public partial class CarDetailsPage : ContentPage
 {
-	public CarDetailsPage()
+	public CarDetailsPage(CarDetailsViewModel viewModel)
 	{
 		InitializeComponent();
-	}
+        BindingContext = viewModel;
+    }
 }
