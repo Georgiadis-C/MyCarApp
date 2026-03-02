@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyCarApp.Views.UpdateCarPage"
+             xmlns:local="clr-namespace:MyCarApp.ViewModels"
+             x:DataType="local:UpdateCarPageViewModel"
+             Title="Edit Vehicle">
+
+    <Grid>
+        <BoxView>
+            <BoxView.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#008080" Offset="0.0" />
+                    <GradientStop Color="#E8F1F2" Offset="0.5" />
+                    <GradientStop Color="#E8F1F2" Offset="1.0" />
+                </LinearGradientBrush>
+            </BoxView.Background>
+        </BoxView>
+
+        <ScrollView>
+            <VerticalStackLayout Spacing="0">
+
+                <Grid HeightRequest="160">
+                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="5">
+                        <Label Text="Edit Car" 
+                               FontSize="30" 
+                               FontAttributes="Bold" 
+                               TextColor="White" 
+                               HorizontalOptions="Center"/>
+                        <Label Text="Modify your vehicle details" 
+                               FontSize="16" 
+                               TextColor="#E1E1E1" 
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Grid>
+
+                <Border Margin="20,-20,20,40" 
+                        Padding="25" 
+                        StrokeShape="RoundRectangle 25"
+                        BackgroundColor="White"
+                        StrokeThickness="0">
+                    <Border.Shadow>
+                        <Shadow Brush="Black" Offset="0,15" Radius="30" Opacity="0.15" />
+                    </Border.Shadow>
+
+                    <VerticalStackLayout Spacing="18">
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="BRAND" FontSize="11" FontAttributes="Bold" TextColor="Gray" Margin="5,0"/>
+                            <Frame Padding="15,0" HeightRequest="50" CornerRadius="12" BackgroundColor="#F8F9FA" HasShadow="False" BorderColor="#E0E0E0">
+                                <Entry Text="{Binding Car.Brand}" VerticalOptions="Center" TextColor="#333" Placeholder="e.g. Toyota" />
+                            </Frame>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="MODEL" FontSize="11" FontAttributes="Bold" TextColor="Gray" Margin="5,0"/>
+                            <Frame Padding="15,0" HeightRequest="50" CornerRadius="12" BackgroundColor="#F8F9FA" HasShadow="False" BorderColor="#E0E0E0">
+                                <Entry Text="{Binding Car.Model}" VerticalOptions="Center" TextColor="#333" Placeholder="e.g. Corolla" />
+                            </Frame>
+                        </VerticalStackLayout>
+
+                        <BoxView HeightRequest="1" Color="#F0F0F0" Margin="0,5" />
+
+                        <Grid ColumnDefinitions="*, *" ColumnSpacing="15">
+                            <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                <Label Text="YEAR" FontSize="11" FontAttributes="Bold" TextColor="Gray" Margin="5,0"/>
+                                <Frame Padding="15,0" HeightRequest="50" CornerRadius="12" BackgroundColor="#F8F9FA" HasShadow="False" BorderColor="#E0E0E0">
+                                    <Entry Text="{Binding Car.Year}" Keyboard="Numeric" VerticalOptions="Center" HorizontalTextAlignment="Center" />
+                                </Frame>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                <Label Text="HP" FontSize="11" FontAttributes="Bold" TextColor="Gray" Margin="5,0"/>
+                                <Frame Padding="15,0" HeightRequest="50" CornerRadius="12" BackgroundColor="#F8F9FA" HasShadow="False" BorderColor="#E0E0E0">
+                                    <Entry Text="{Binding Car.Horsepower}" Keyboard="Numeric" VerticalOptions="Center" HorizontalTextAlignment="Center" />
+                                </Frame>
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="ENGINE (CC)" FontSize="11" FontAttributes="Bold" TextColor="Gray" Margin="5,0"/>
+                            <Frame Padding="15,0" HeightRequest="50" CornerRadius="12" BackgroundColor="#F8F9FA" HasShadow="False" BorderColor="#E0E0E0">
+                                <Entry Text="{Binding Car.CubicCentimeters}" Keyboard="Numeric" VerticalOptions="Center" />
+                            </Frame>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="10" Margin="0,10,0,0">
+                            <Button Text="SAVE CHANGES" 
+                                    Command="{Binding UpdateCarCommand}"
+                                    BackgroundColor="#008080" 
+                                    TextColor="White" 
+                                    FontAttributes="Bold" 
+                                    CornerRadius="15" 
+                                    HeightRequest="55">
+                                <Button.Shadow>
+                                    <Shadow Brush="#008080" Offset="0,5" Radius="10" Opacity="0.3" />
+                                </Button.Shadow>
+                            </Button>
+
+                            <Button Text="CANCEL" 
+                                    BackgroundColor="Transparent"
+                                    TextColor="Gray"
+                                    HeightRequest="45"
+                                    Command="{Binding CancelCommand}"/>
+                        </VerticalStackLayout>
+
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

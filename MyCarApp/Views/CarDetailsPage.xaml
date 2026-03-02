@@ -4,62 +4,107 @@
              x:Class="MyCarApp.Views.CarDetailsPage"
              xmlns:local="clr-namespace:MyCarApp.ViewModels"
              x:DataType="local:CarDetailsViewModel"
-             Title=""
-             BackgroundColor="#F5F5F5">
+             Title="Vehicle Details">
 
-    <ScrollView>
-        <VerticalStackLayout Spacing="0">
+    <Grid>
 
-            <Grid HeightRequest="200" BackgroundColor="#512BD4">
-                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="5">
-                    <Label Text="{Binding Car.Brand}" 
-                           FontSize="32" 
-                           FontAttributes="Bold" 
-                           TextColor="White" 
-                           HorizontalOptions="Center"/>
-                    <Label Text="{Binding Car.Model}" 
-                           FontSize="20" 
-                           TextColor="#E1E1E1" 
-                           HorizontalOptions="Center"/>
-                </VerticalStackLayout>
-            </Grid>
+        <BoxView Grid.RowSpan="2">
+            <BoxView.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#008080" Offset="0.0" />
+                    <GradientStop Color="#E8F1F2" Offset="0.4" />
+                    <GradientStop Color="#E8F1F2" Offset="1.0" />
+                </LinearGradientBrush>
+            </BoxView.Background>
+        </BoxView>
 
-            <Border Margin="20,-40,20,20" 
-                    Padding="20" 
-                    StrokeShape="RoundRectangle 15"
-                    BackgroundColor="White"
-                    StrokeThickness="0">
-                <Border.Shadow>
-                    <Shadow Brush="Black" Offset="0,10" Radius="20" Opacity="0.1" />
-                </Border.Shadow>
+        <ScrollView>
+            <VerticalStackLayout Spacing="0">
 
-                <VerticalStackLayout Spacing="15">
+                <Grid HeightRequest="200">
+                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="5" Margin="0,0,0,20">
+                        <Label Text="{Binding Car.Brand}" 
+                               FontSize="32" 
+                               FontAttributes="Bold" 
+                               TextColor="White" 
+                               HorizontalOptions="Center"/>
+                        <Label Text="{Binding Car.Model}" 
+                               FontSize="20" 
+                               TextColor="#E1E1E1" 
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Grid>
 
-                    <Label Text="{Binding Car.Horsepower, StringFormat='{0} HP'}" 
-                           FontSize="28" 
-                           TextColor="#512BD4"
-                           FontAttributes="Bold" 
-                           HorizontalOptions="Center" />
+                <Border Margin="20,-40,20,40" 
+                        Padding="25" 
+                        StrokeShape="RoundRectangle 20"
+                        BackgroundColor="White"
+                        StrokeThickness="0">
+                    <Border.Shadow>
+                        <Shadow Brush="#000000" Offset="0,10" Radius="20" Opacity="0.15" />
+                    </Border.Shadow>
 
-                    <BoxView HeightRequest="1" Color="#EEEEEE" HorizontalOptions="Fill" />
+                    <VerticalStackLayout Spacing="20">
 
-                    <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto, Auto, Auto" RowSpacing="10" ColumnSpacing="10">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="{Binding Car.Horsepower, StringFormat='{0} HP'}" 
+                                   FontSize="30" 
+                                   TextColor="#008080"
+                                   FontAttributes="Bold" 
+                                   HorizontalOptions="Center" />
+                            <Label Text="POWER OUTPUT" 
+                                   FontSize="11" 
+                                   TextColor="Gray" 
+                                   CharacterSpacing="2"
+                                   HorizontalOptions="Center" />
+                        </VerticalStackLayout>
 
-                        <Label Grid.Row="0" Grid.Column="0" Text="Year:" FontAttributes="Bold" TextColor="Gray" />
-                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding Car.Year}" HorizontalOptions="End" />
+                        <BoxView HeightRequest="1" Color="#F0F0F0" HorizontalOptions="Fill" />
 
-                        <Label Grid.Row="1" Grid.Column="0" Text="Cybic Centimeters:" FontAttributes="Bold" TextColor="Gray" />
-                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Car.CubicCentimeters, StringFormat='{0} cc'}" HorizontalOptions="End" />
-                    </Grid>
+                        <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto, Auto" RowSpacing="15" ColumnSpacing="10">
+                            <Label Grid.Row="0" Grid.Column="0" Text="Year" FontAttributes="Bold" TextColor="#707070" />
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Car.Year}" HorizontalOptions="End" FontAttributes="Bold" />
 
-                    <Button Text="Update" 
-                            Margin="0,10,0,0"
-                            BackgroundColor="#512BD4" 
-                            TextColor="White"
-                            CornerRadius="10" />
-                </VerticalStackLayout>
-            </Border>
+                            <Label Grid.Row="1" Grid.Column="0" Text="Engine Size" FontAttributes="Bold" TextColor="#707070" />
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Car.CubicCentimeters, StringFormat='{0} cc'}" HorizontalOptions="End" FontAttributes="Bold" />
+                        </Grid>
 
-        </VerticalStackLayout>
-    </ScrollView>
+                        <BoxView HeightRequest="1" Color="#F0F0F0" HorizontalOptions="Fill" />
+
+                        <VerticalStackLayout Spacing="12">
+                            <Button Text="UPDATE DETAILS" 
+                                    BackgroundColor="#008080"
+                                    Command="{Binding GoToUpdateCarCommand}"
+                                    TextColor="White"
+                                    FontAttributes="Bold"
+                                    CornerRadius="12"
+                                    HeightRequest="55" />
+
+                            <Grid ColumnDefinitions="*, *" ColumnSpacing="12">
+                                <Button Grid.Column="0"
+                                        Text="TRIPS"
+                                        BackgroundColor="Transparent"
+                                        TextColor="#008080"
+                                        BorderColor="#008080"
+                                        BorderWidth="1"
+                                        HeightRequest="50"
+                                        CornerRadius="12"/>
+
+                                <Button Grid.Column="1"
+                                        Text="SERVICE"
+                                        BackgroundColor="Transparent"
+                                        TextColor="#008080"
+                                        BorderColor="#008080"
+                                        BorderWidth="1"
+                                        HeightRequest="50"
+                                        CornerRadius="12"/>
+                            </Grid>
+                        </VerticalStackLayout>
+
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

@@ -25,6 +25,7 @@ namespace MyCarApp
             builder.Services.AddSingleton<CarsViewModel>();
             builder.Services.AddSingleton<AddCarViewModel>();
             builder.Services.AddSingleton<CarDetailsViewModel>();
+            builder.Services.AddTransient<UpdateCarPageViewModel>();
 
             // Views
             builder.Services.AddSingleton<CarKmPage>();
@@ -32,6 +33,7 @@ namespace MyCarApp
             builder.Services.AddSingleton<CarsPage>();
             builder.Services.AddSingleton<AddCarPage>();
             builder.Services.AddSingleton<CarDetailsPage>();
+            builder.Services.AddTransient<UpdateCarPage>();
 
             //Services
             builder.Services.AddSingleton<ICarService,CarService>();

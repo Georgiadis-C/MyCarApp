@@ -5,9 +5,9 @@
              xmlns:local="clr-namespace:MyCarApp.ViewModels"
              x:DataType="local:CarsViewModel"
              xmlns:models="clr-namespace:MyCarApp.Models"
-             Title="CarsPage">
+             Title="Your Cars">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding GoToAddCarCommand}" Text="Add Car" />
+        <ToolbarItem Command="{Binding GoToAddCarCommand}" Text="Add Car"/>
     </ContentPage.ToolbarItems>
     <CollectionView ItemsSource="{Binding Cars}" SelectionMode="None">
         <CollectionView.ItemTemplate>
