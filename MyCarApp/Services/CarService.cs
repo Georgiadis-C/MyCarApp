@@ -15,7 +15,7 @@ namespace MyCarApp.Services
             SetUpDB();
         }
 
-        private async void SetUpDB()
+        private async Task SetUpDB()
         {
             if (_dbConnection == null)
             {

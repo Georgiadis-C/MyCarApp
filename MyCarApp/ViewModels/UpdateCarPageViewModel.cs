@@ -8,22 +8,17 @@ using MyCarApp.Models;
 
 namespace MyCarApp.ViewModels
 {
-    public partial class UpdateCarPageViewModel(ICarService carService) : ObservableObject, Microsoft.Maui.Controls.IQueryAttributable
+    [QueryProperty(nameof(Car), "Car")]
+    public partial class UpdateCarPageViewModel(ICarService carService) : ObservableObject
     {
         [ObservableProperty]
         CarsModel car = new();
 
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
-        {
-            if (query.ContainsKey("Car"))
-            {
-                Car = query["Car"] as CarsModel;
-            }
-        }
-
         [RelayCommand]
         public async Task UpdateCar()
         {
+            await Shell.Current.DisplayAlertAsync("Debug", $"Saving Car with ID: {Car.CarId}", "OK");
+
             await carService.SaveCar(Car);
             await AppShell.Current.GoToAsync("..");
         }

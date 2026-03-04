@@ -10,12 +10,8 @@ using MyCarApp.Views;
 
 namespace MyCarApp.ViewModels
 {
-    [QueryProperty(nameof(CarsModel), "Car")]
     public partial class CarsViewModel(ICarService _carService) : ObservableObject
     {
-
-        [ObservableProperty]
-        string _carId;
 
         public ObservableCollection<CarsModel> Cars { get; set; } = new ObservableCollection<CarsModel>();
 

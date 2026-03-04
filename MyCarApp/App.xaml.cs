@@ -34,7 +34,7 @@ namespace MyCarApp
             Debug.WriteLine(e.Exception.Message);
             Debug.WriteLine(e.Exception.StackTrace);
 
-            e.SetObserved(); // πολύ σημαντικό για να μην κλείσει η εφαρμογή
+            e.SetObserved();
         }
     }
 }
