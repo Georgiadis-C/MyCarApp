@@ -4,48 +4,96 @@
              x:Class="MyCarApp.Views.CarsPage"
              xmlns:local="clr-namespace:MyCarApp.ViewModels"
              x:DataType="local:CarsViewModel"
-             xmlns:models="clr-namespace:MyCarApp.Models"
-             Title="Your Cars">
+             xmlns:models="clr-namespace:MyCarApp.Models">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="White" Offset="0.1" />
+            <GradientStop Color="#008080" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding GoToAddCarCommand}" Text="Add Car"/>
+        <ToolbarItem Command="{Binding GoToAddCarCommand}" Text="Add Car" />
     </ContentPage.ToolbarItems>
-    <CollectionView ItemsSource="{Binding Cars}" SelectionMode="None">
-        <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="models:CarsModel">
-                <Grid Padding="10,5">
-                    <Border Stroke="#E0E0E0"
-                        StrokeThickness="1"
-                        Padding="15"
-                        BackgroundColor="White">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="12"/>
-                        </Border.StrokeShape>
 
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer 
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type local:CarsViewModel}}, Path=SelectCarCommand}"
-                            CommandParameter="{Binding .}"/>
-                        </Border.GestureRecognizers>
-                        <HorizontalStackLayout Spacing="15">
-                            <Label Text="🚗" FontSize="24" VerticalOptions="Center"/>
+    <Grid RowDefinitions="Auto,*">
 
-                            <Label Text="{Binding Brand}" 
-                               FontSize="18" 
-                               FontAttributes="Bold" 
-                               VerticalOptions="Center"/>
+        <VerticalStackLayout Grid.Row="0" Padding="25,30,25,15" Spacing="5">
+            <Label Text="My Collection" 
+                   FontSize="32" 
+                   FontAttributes="Bold" 
+                   TextColor="#008080"/>
+            <Label Text="Swipe to manage your vehicles" 
+                   FontSize="16" 
+                   TextColor="#444444"/>
+        </VerticalStackLayout>
 
-                            <Label Text="{Binding Model}" 
-                               FontSize="18" 
-                               VerticalOptions="Center"/>
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Cars}" SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="15" />
+            </CollectionView.ItemsLayout>
 
-                            <Label Text="{Binding Year, StringFormat='({0})'}" 
-                               FontSize="14" 
-                               TextColor="Gray" 
-                               VerticalOptions="Center" />
-                        </HorizontalStackLayout>
-                    </Border>
-                </Grid>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:CarsModel">
+                    <Grid Padding="20,0">
+                        <Border BackgroundColor="#008080"
+                                StrokeThickness="0"
+                                Padding="20">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="20"/>
+                            </Border.StrokeShape>
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:CarsViewModel}}, Path=SelectCarCommand}"
+                                    CommandParameter="{Binding .}"/>
+                            </Border.GestureRecognizers>
+
+                            <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="15">
+                                <Border Grid.Column="0"
+                                        BackgroundColor="White"
+                                        HeightRequest="55"
+                                        WidthRequest="55"
+                                        StrokeThickness="0">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="27.5"/>
+                                    </Border.StrokeShape>
+                                    <Label Text="🚗" 
+                                           HorizontalOptions="Center" 
+                                           VerticalOptions="Center" 
+                                           FontSize="24"/>
+                                </Border>
+
+                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                                    <Label Text="{Binding Brand}" 
+                                           FontSize="20" 
+                                           FontAttributes="Bold" 
+                                           TextColor="White"/>
+                                    <Label Text="{Binding Model}" 
+                                           FontSize="16" 
+                                           TextColor="#E0F2F1"/>
+                                </VerticalStackLayout>
+
+                                <Border Grid.Column="2" 
+                                        BackgroundColor="Transparent"
+                                        Stroke="White"
+                                        StrokeThickness="1.5"
+                                        Padding="12,6"
+                                        VerticalOptions="Center">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="10"/>
+                                    </Border.StrokeShape>
+                                    <Label Text="{Binding Year}" 
+                                           TextColor="White" 
+                                           FontAttributes="Bold" 
+                                           FontSize="13"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>
