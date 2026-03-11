@@ -89,6 +89,9 @@
 	  <MauiXaml Update="Views\AddCarPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\AddTripPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\CarKmPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

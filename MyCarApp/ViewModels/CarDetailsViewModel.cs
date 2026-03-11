@@ -4,7 +4,6 @@ using MyCarApp.Interfaces;
 using MyCarApp.Models;
 using MyCarApp.ViewModels;
 using MyCarApp.Views;
-using static AndroidX.ConstraintLayout.Core.Motion.Utils.HyperSpline;
 
 
 namespace MyCarApp.ViewModels

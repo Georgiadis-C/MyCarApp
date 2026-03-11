@@ -37,9 +37,9 @@ namespace MyCarApp.ViewModels
             if (carModel == null) return;
 
             await Shell.Current.GoToAsync(nameof(CarDetailsPage), true, new Dictionary<string, object>
-    {
-        {"Car", carModel}
-    });
+                {
+                    {"Car", carModel}
+                });
         }
 
         [RelayCommand]

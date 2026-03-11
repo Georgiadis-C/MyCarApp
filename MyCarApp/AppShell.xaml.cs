@@ -14,6 +14,7 @@ namespace MyCarApp
             Routing.RegisterRoute(nameof(UpdateCarPage), typeof(UpdateCarPage));
 
             Routing.RegisterRoute(nameof(CarKmPage), typeof(CarKmPage));
+            Routing.RegisterRoute(nameof(AddTripPage), typeof(AddTripPage));
         }
     }
 }
