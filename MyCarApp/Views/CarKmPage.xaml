@@ -5,6 +5,8 @@
              xmlns:local="clr-namespace:MyCarApp.ViewModels"
              x:DataType="local:CarKmViewModel"
              Title="CarKmPage">
+    
+
     <VerticalStackLayout>
         <Label 
             Text="Welcome to .NET MAUI!"

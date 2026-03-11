@@ -4,7 +4,7 @@
              x:Class="MyCarApp.Views.UpdateCarPage"
              xmlns:local="clr-namespace:MyCarApp.ViewModels"
              x:DataType="local:UpdateCarPageViewModel"
-             Title="Edit Vehicle">
+             Shell.BackgroundColor="#008080">
 
     <Grid>
         <BoxView>

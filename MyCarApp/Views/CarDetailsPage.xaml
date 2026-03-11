@@ -4,7 +4,7 @@
              x:Class="MyCarApp.Views.CarDetailsPage"
              xmlns:local="clr-namespace:MyCarApp.ViewModels"
              x:DataType="local:CarDetailsViewModel"
-             Title="Vehicle Details">
+             Shell.BackgroundColor="#008080">
 
     <Grid>
 
@@ -83,6 +83,7 @@
                             <Grid ColumnDefinitions="*, *" ColumnSpacing="12">
                                 <Button Grid.Column="0"
                                         Text="TRIPS"
+                                        Command="{Binding GoToCarKmCommand}"
                                         BackgroundColor="Transparent"
                                         TextColor="#008080"
                                         BorderColor="#008080"

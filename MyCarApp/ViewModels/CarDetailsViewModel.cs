@@ -4,6 +4,7 @@ using MyCarApp.Interfaces;
 using MyCarApp.Models;
 using MyCarApp.ViewModels;
 using MyCarApp.Views;
+using static AndroidX.ConstraintLayout.Core.Motion.Utils.HyperSpline;
 
 
 namespace MyCarApp.ViewModels
@@ -21,9 +22,18 @@ namespace MyCarApp.ViewModels
         public async Task GoToUpdateCar()
         {
             await Shell.Current.GoToAsync(nameof(UpdateCarPage), true, new Dictionary<string, object>
-    {
-        {"Car", Car}
-    });
+                 {
+                     {"Car", Car}
+                 });
+        }
+
+        [RelayCommand]
+        public async Task GoToCarKm()
+        {
+            await Shell.Current.GoToAsync(nameof(CarKmPage), true, new Dictionary<string, object>
+                {
+                     {"Car", Car}
+                 });
         }
 
         [RelayCommand]
