@@ -20,23 +20,33 @@ namespace MyCarApp.ViewModels
         [ObservableProperty]
         CarKmModel trip;
 
+        [ObservableProperty]
+        ObservableCollection<CarKmModel> kmLogs = new();
+
+        [ObservableProperty]
+        double totalKilometers;
+
         public ObservableCollection<CarKmModel> Trips { get; set; } = new ObservableCollection<CarKmModel>();
 
 
         [RelayCommand]
         public async Task GetCarKmList()
         {
-            var carKmList = await carKmService.GetCarKmList();
+            if (Car == null) return;
 
-            Trips.Clear();
+            // Παίρνουμε ΟΛΑ τα χιλιόμετρα από τη βάση
+            var allTrips = await carKmService.GetCarKmList();
 
-            if (carKmList != null && carKmList.Count > 0)
+            // Φιλτράρουμε ώστε να δούμε μόνο αυτά που ανήκουν στο τρέχον αυτοκίνητο
+            var filteredTrips = allTrips.Where(x => x.CarId == Car.CarId).ToList();
+
+            KmLogs.Clear();
+            foreach (var trip in filteredTrips)
             {
-                foreach (var trip in carKmList)
-                {
-                    Trips.Add(trip);
-                }
+                KmLogs.Add(trip);
             }
+
+            TotalKilometers = filteredTrips.Sum(x => x.Kilometers);
         }
 
         [RelayCommand]
@@ -53,7 +63,10 @@ namespace MyCarApp.ViewModels
         [RelayCommand]
         public async Task GoToAddTrip()
         {
-            await Shell.Current.GoToAsync(nameof(AddTripPage));
+            await Shell.Current.GoToAsync(nameof(AddTripPage), new Dictionary<string, object>
+                {
+                    { "Car", Car } 
+                });
         }
     }
 }

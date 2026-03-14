@@ -8,16 +8,28 @@ using MyCarApp.Models;
 
 namespace MyCarApp.ViewModels
 {
+    [QueryProperty(nameof(Car), "Car")]
+
     public partial class AddTripViewModel(ICarKmService carKmService) : ObservableObject
     {
+        [ObservableProperty]
+        CarsModel car;
+
         [ObservableProperty]
         CarKmModel trip = new();
 
         [RelayCommand]
         public async Task SaveCarKm()
         {
+            // ΕΔΩ ΕΙΝΑΙ Η ΔΙΟΡΘΩΣΗ:
+            // Πρέπει να δώσεις το CarId του αυτοκινήτου στο Trip πριν το σώσεις
+            if (Car != null)
+            {
+                Trip.CarId = Car.CarId;
+            }
+
             await carKmService.SaveCarKm(Trip);
-            await AppShell.Current.GoToAsync("..");
+            await Shell.Current.GoToAsync("..");
         }
     }
 }

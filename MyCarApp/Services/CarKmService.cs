@@ -34,7 +34,7 @@ namespace MyCarApp.Services
 
         public async Task SaveCarKm(CarKmModel carKmModel)
         {
-            if (carKmModel.CarId == 0)
+            if (carKmModel.Id == 0)
             {
                 await _dbConnection.InsertAsync(carKmModel);
             }

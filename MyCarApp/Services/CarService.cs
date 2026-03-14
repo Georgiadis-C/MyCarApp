@@ -22,6 +22,7 @@ namespace MyCarApp.Services
                 string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Car.db3");
                 _dbConnection = new SQLiteAsyncConnection(dbPath);
                 await _dbConnection.CreateTableAsync<CarsModel>();
+                await _dbConnection.CreateTableAsync<CarKmModel>();
             }
         }
 

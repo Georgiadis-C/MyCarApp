@@ -24,7 +24,7 @@
 
             <VerticalStackLayout Spacing="15">
                 <Label Text="Total Kilometers" TextColor="#008080" FontAttributes="Bold"/>
-                <Entry Text="{Binding NewTrip.Kilometers}" 
+                <Entry Text="{Binding Trip.Kilometers}" 
                        Placeholder="π.χ. 15400" 
                        Keyboard="Numeric"
                        TextColor="Black"/>
@@ -32,7 +32,7 @@
         </Border>
 
         <Button Text="Save"
-                Command="{Binding SaveTripCommand}"
+                Command="{Binding SaveCarKmCommand}"
                 BackgroundColor="#008080" TextColor="White"
                 CornerRadius="25" HeightRequest="55" FontAttributes="Bold"/>
     </VerticalStackLayout>

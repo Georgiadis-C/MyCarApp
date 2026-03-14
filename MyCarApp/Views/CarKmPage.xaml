@@ -2,9 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:local="clr-namespace:MyCarApp.ViewModels"
+             xmlns:models="clr-namespace:MyCarApp.Models"
              x:DataType="local:CarKmViewModel"
              x:Class="MyCarApp.Views.CarKmPage"
-             Title="Ιστορικό Χιλιομέτρων">
+             Title="Trip Record">
 
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -16,12 +17,18 @@
     <Grid RowDefinitions="Auto, *, Auto">
         <VerticalStackLayout Grid.Row="0" Padding="25,20">
             <Label Text="{Binding Car.Brand}" FontSize="28" FontAttributes="Bold" TextColor="#008080"/>
-            <Label Text="Your trips &amp; Kilometers" TextColor="#666666"/>
+            <Label Text="Total Kilometers:" TextColor="#666666"/>
+            <Label Text="{Binding TotalKilometers, StringFormat='{0} km'}" 
+           FontSize="32" 
+           FontAttributes="Bold" 
+           TextColor="#008080"/>
         </VerticalStackLayout>
 
-        <CollectionView Grid.Row="1" ItemsSource="{Binding KmLogs}">
+        <CollectionView Grid.Row="1" 
+                        ItemsSource="{Binding KmLogs}" 
+                        SelectionMode="None">
             <CollectionView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="models:CarKmModel">
                     <Grid Padding="20,5">
                         <Border BackgroundColor="#008080" Padding="15">
                             <Border.StrokeShape>
@@ -29,7 +36,7 @@
                             </Border.StrokeShape>
                             <Grid ColumnDefinitions="*, Auto">
                                 <VerticalStackLayout>
-                                    <Label Text="Trips Record" TextColor="#E0F2F1" FontSize="12"/>
+                                    <Label Text="Ημερομηνία Καταγραφής" TextColor="#E0F2F1" FontSize="12"/>
                                     <Label Text="{Binding Kilometers, StringFormat='{0} km'}" 
                                            TextColor="White" FontSize="20" FontAttributes="Bold"/>
                                 </VerticalStackLayout>
@@ -41,7 +48,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Button Grid.Row="2" Text="Add Trip"
+        <Button Grid.Row="2" Text="ADD NEW TRIP"
                 Command="{Binding GoToAddTripCommand}"
                 Margin="25" BackgroundColor="#008080" TextColor="White"
                 CornerRadius="25" HeightRequest="55" FontAttributes="Bold"/>
