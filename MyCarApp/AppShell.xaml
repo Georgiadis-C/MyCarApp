@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:MyCarApp"
     xmlns:views="clr-namespace:MyCarApp.Views"
     Title="MyCarApp"
-    Shell.TabBarBackgroundColor="Black"
+    Shell.TabBarBackgroundColor="White"
     Shell.TabBarForegroundColor="LightGray"
     Shell.TabBarTitleColor="LightGray">
 

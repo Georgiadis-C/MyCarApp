@@ -5,7 +5,7 @@
              xmlns:models="clr-namespace:MyCarApp.Models"
              x:DataType="local:CarKmViewModel"
              x:Class="MyCarApp.Views.CarKmPage"
-             Title="Trip Record">
+             Shell.BackgroundColor="White">
 
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -18,11 +18,12 @@
         <VerticalStackLayout Grid.Row="0" Padding="25,20">
             <Label Text="{Binding Car.Brand}" FontSize="28" FontAttributes="Bold" TextColor="#008080"/>
             <Label Text="Total Kilometers:" TextColor="#666666"/>
-            <Label Text="{Binding TotalKilometers, StringFormat='{0} km'}" 
-           FontSize="32" 
-           FontAttributes="Bold" 
-           TextColor="#008080"/>
+            <Label Text="{Binding TotalKilometers, StringFormat='{0:N1} km'}" 
+                   FontSize="32" 
+                   FontAttributes="Bold" 
+                   TextColor="#008080"/>
         </VerticalStackLayout>
+        
 
         <CollectionView Grid.Row="1" 
                         ItemsSource="{Binding KmLogs}" 
@@ -34,13 +35,39 @@
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="20"/>
                             </Border.StrokeShape>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:CarKmViewModel}}, Path=SelectTripCommand}"
+                                    CommandParameter="{Binding .}"/>
+                            </Border.GestureRecognizers>
+
                             <Grid ColumnDefinitions="*, Auto">
-                                <VerticalStackLayout>
-                                    <Label Text="Ημερομηνία Καταγραφής" TextColor="#E0F2F1" FontSize="12"/>
-                                    <Label Text="{Binding Kilometers, StringFormat='{0} km'}" 
-                                           TextColor="White" FontSize="20" FontAttributes="Bold"/>
+                                <VerticalStackLayout Spacing="2">
+                                    <Label Text="{Binding Date, StringFormat='{0:dd/MM/yyyy}'}" 
+                                           TextColor="#B2DFDB" 
+                                           FontSize="11" 
+                                           FontAttributes="Bold"/>
+
+                                    <HorizontalStackLayout Spacing="5" Margin="0,2">
+                                        <Label Text="{Binding StartingPoint}" 
+                                               TextColor="White" 
+                                               FontSize="16" 
+                                               FontAttributes="Bold"/>
+                                        <Label Text="➔" 
+                                               TextColor="#B2DFDB" 
+                                               VerticalOptions="Center"/>
+                                        <Label Text="{Binding Destination}" 
+                                               TextColor="White" 
+                                               FontSize="16" 
+                                               FontAttributes="Bold"/>
+                                    </HorizontalStackLayout>
+
+                                    <Label Text="{Binding Kilometers, StringFormat='{0:N1} km'}" 
+                                           TextColor="White" 
+                                           FontSize="18" />
                                 </VerticalStackLayout>
-                                <Label Grid.Column="1" Text="🏁" VerticalOptions="Center" FontSize="24"/>
+
+                                <Label Grid.Column="1" Text="🏁" VerticalOptions="Center" FontSize="28"/>
                             </Grid>
                         </Border>
                     </Grid>

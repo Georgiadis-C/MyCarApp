@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyCarApp.Views.UpdateTripPage"
+             xmlns:local="clr-namespace:MyCarApp.ViewModels"
+             x:DataType="local:UpdateTripViewModel"
+             Shell.BackgroundColor="White">
+    <ContentPage.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="White" Offset="0.1" />
+                <GradientStop Color="#008080" Offset="1.0" />
+            </LinearGradientBrush>
+        </ContentPage.Background>
+
+    <VerticalStackLayout Padding="25" Spacing="20">
+        <Label Text="Edit Your Trip" FontSize="24" FontAttributes="Bold" TextColor="#008080" HorizontalOptions="Center"/>
+
+        <Border BackgroundColor="White" Padding="20">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="25"/>
+            </Border.StrokeShape>
+            <VerticalStackLayout Spacing="15">
+                <Label Text="Total Kilometers" TextColor="#008080" FontAttributes="Bold"/>
+                <Entry Text="{Binding Trip.Kilometers}" TextColor="Black"  Keyboard="Numeric"/>
+
+                <Label Text="Starting Point" TextColor="#008080" FontAttributes="Bold"/>
+                <Entry Text="{Binding Trip.StartingPoint}" TextColor="Black"/>
+
+                <Label Text="Destination" TextColor="#008080" FontAttributes="Bold"/>
+                <Entry Text="{Binding Trip.Destination}" TextColor="Black"/>
+
+                <Label Text="Date" TextColor="#008080" FontAttributes="Bold"/>
+                <DatePicker Date="{Binding Trip.Date}" TextColor="Black" Format="dd/MM/yyyy"/>
+            </VerticalStackLayout>
+        </Border>
+
+        <Button Text="Save Changes" 
+                Command="{Binding UpdateTripCommand}" 
+                BackgroundColor="#008080" TextColor="White" 
+                CornerRadius="25" HeightRequest="55" FontAttributes="Bold"/>
+    </VerticalStackLayout>
+</ContentPage>

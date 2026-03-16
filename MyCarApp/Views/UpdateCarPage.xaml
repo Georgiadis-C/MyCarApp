@@ -52,13 +52,13 @@
                             <VerticalStackLayout Grid.Column="0" Spacing="4">
                                 <Label Text="YEAR" FontSize="11" FontAttributes="Bold" TextColor="Gray" Margin="5,0"/>
                                 <Frame Padding="15,0" HeightRequest="50" CornerRadius="12" BackgroundColor="#F8F9FA" HasShadow="False" BorderColor="#E0E0E0">
-                                    <Entry Text="{Binding Car.Year}" Keyboard="Numeric" VerticalOptions="Center" HorizontalTextAlignment="Center" />
+                                    <Entry Text="{Binding Car.Year}" TextColor="Black" Keyboard="Numeric" VerticalOptions="Center" HorizontalTextAlignment="Center" />
                                 </Frame>
                             </VerticalStackLayout>
                             <VerticalStackLayout Grid.Column="1" Spacing="4">
                                 <Label Text="HP" FontSize="11" FontAttributes="Bold" TextColor="Gray" Margin="5,0"/>
                                 <Frame Padding="15,0" HeightRequest="50" CornerRadius="12" BackgroundColor="#F8F9FA" HasShadow="False" BorderColor="#E0E0E0">
-                                    <Entry Text="{Binding Car.Horsepower}" Keyboard="Numeric" VerticalOptions="Center" HorizontalTextAlignment="Center" />
+                                    <Entry Text="{Binding Car.Horsepower}" TextColor="Black" Keyboard="Numeric" VerticalOptions="Center" HorizontalTextAlignment="Center" />
                                 </Frame>
                             </VerticalStackLayout>
                         </Grid>
@@ -66,7 +66,7 @@
                         <VerticalStackLayout Spacing="4">
                             <Label Text="ENGINE (CC)" FontSize="11" FontAttributes="Bold" TextColor="Gray" Margin="5,0"/>
                             <Frame Padding="15,0" HeightRequest="50" CornerRadius="12" BackgroundColor="#F8F9FA" HasShadow="False" BorderColor="#E0E0E0">
-                                <Entry Text="{Binding Car.CubicCentimeters}" Keyboard="Numeric" VerticalOptions="Center" />
+                                <Entry Text="{Binding Car.CubicCentimeters}" TextColor="Black" Keyboard="Numeric" VerticalOptions="Center" />
                             </Frame>
                         </VerticalStackLayout>
 

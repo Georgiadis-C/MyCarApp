@@ -16,19 +16,38 @@ namespace MyCarApp.ViewModels
         CarsModel car;
 
         [ObservableProperty]
-        CarKmModel trip = new();
+        CarKmModel trip = new()
+        {
+            Date = DateTime.Now,
+            StartingPoint = string.Empty,
+            Destination = string.Empty
+        };
 
         [RelayCommand]
         public async Task SaveCarKm()
         {
-            // ΕΔΩ ΕΙΝΑΙ Η ΔΙΟΡΘΩΣΗ:
-            // Πρέπει να δώσεις το CarId του αυτοκινήτου στο Trip πριν το σώσεις
+
+            if (string.IsNullOrWhiteSpace(Trip.StartingPoint) || string.IsNullOrWhiteSpace(Trip.Destination) || Trip.Kilometers <= 0)
+            {
+
+                await Shell.Current.DisplayAlertAsync("Error", "You must complete all the fields to continue!", "OK");
+                return;
+            }
+
             if (Car != null)
             {
                 Trip.CarId = Car.CarId;
             }
 
             await carKmService.SaveCarKm(Trip);
+
+            Trip = new CarKmModel
+            {
+                Date = DateTime.Now,
+                StartingPoint = string.Empty,
+                Destination = string.Empty
+            };
+
             await Shell.Current.GoToAsync("..");
         }
     }

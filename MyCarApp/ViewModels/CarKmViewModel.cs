@@ -54,7 +54,7 @@ namespace MyCarApp.ViewModels
         {
             if (carKmModel == null) return;
 
-            await Shell.Current.GoToAsync(nameof(CarDetailsPage), true, new Dictionary<string, object>
+            await Shell.Current.GoToAsync(nameof(TripDetailsPage), true, new Dictionary<string, object>
                 {
                     {"Trip", carKmModel}
                 });

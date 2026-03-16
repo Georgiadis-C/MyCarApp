@@ -4,7 +4,8 @@
              x:Class="MyCarApp.Views.CarsPage"
              xmlns:local="clr-namespace:MyCarApp.ViewModels"
              x:DataType="local:CarsViewModel"
-             xmlns:models="clr-namespace:MyCarApp.Models">
+             xmlns:models="clr-namespace:MyCarApp.Models"
+             Shell.BackgroundColor="White">
 
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -20,11 +21,11 @@
     <Grid RowDefinitions="Auto,*">
 
         <VerticalStackLayout Grid.Row="0" Padding="25,30,25,15" Spacing="5">
-            <Label Text="My Collection" 
+            <Label Text="My Garage" 
                    FontSize="32" 
                    FontAttributes="Bold" 
                    TextColor="#008080"/>
-            <Label Text="Swipe to manage your vehicles" 
+            <Label Text="Your vehicle collection" 
                    FontSize="16" 
                    TextColor="#444444"/>
         </VerticalStackLayout>

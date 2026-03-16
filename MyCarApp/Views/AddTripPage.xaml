@@ -14,7 +14,7 @@
     </ContentPage.Background>
 
     <VerticalStackLayout Padding="25" Spacing="20">
-        <Label Text="Enter Kilometers" FontSize="24" 
+        <Label Text="Trip Details" FontSize="24" 
                FontAttributes="Bold" TextColor="#008080" HorizontalOptions="Center"/>
 
         <Border BackgroundColor="White" Padding="20">
@@ -25,13 +25,34 @@
             <VerticalStackLayout Spacing="15">
                 <Label Text="Total Kilometers" TextColor="#008080" FontAttributes="Bold"/>
                 <Entry Text="{Binding Trip.Kilometers}" 
-                       Placeholder="π.χ. 15400" 
+                       Placeholder="π.χ. 150.5" 
                        Keyboard="Numeric"
                        TextColor="Black"/>
+
+                <BoxView HeightRequest="1" Color="#F0F0F0" />
+
+                <Label Text="Starting Point" TextColor="#008080" FontAttributes="Bold"/>
+                <Entry Text="{Binding Trip.StartingPoint}" 
+                       Placeholder="π.χ. Αθήνα" 
+                       TextColor="Black"/>
+
+                <BoxView HeightRequest="1" Color="#F0F0F0" />
+
+                <Label Text="Destination" TextColor="#008080" FontAttributes="Bold"/>
+                <Entry Text="{Binding Trip.Destination}" 
+                       Placeholder="π.χ. Θεσσαλονίκη" 
+                       TextColor="Black"/>
+
+                <BoxView HeightRequest="1" Color="#F0F0F0" />
+
+                <Label Text="Date" TextColor="#008080" FontAttributes="Bold"/>
+                <DatePicker Date="{Binding Trip.Date}" 
+                            Format="dd/MM/yyyy"
+                            TextColor="Black"/>
             </VerticalStackLayout>
         </Border>
 
-        <Button Text="Save"
+        <Button Text="Save Trip"
                 Command="{Binding SaveCarKmCommand}"
                 BackgroundColor="#008080" TextColor="White"
                 CornerRadius="25" HeightRequest="55" FontAttributes="Bold"/>
