@@ -15,6 +15,7 @@ namespace MyCarApp.Models
         public bool ChangedAirFilter { get; set; }
         public bool ChangedIgnitionCoil { get; set; }
         public bool ChangedFuelFilter { get; set; }
+        public DateTime Date { get; set; } = DateTime.Now;
 
         public int CarId { get; set; }
     }

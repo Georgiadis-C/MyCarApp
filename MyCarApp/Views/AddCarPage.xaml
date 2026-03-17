@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyCarApp.Views.AddCarPage"
              xmlns:local="clr-namespace:MyCarApp.ViewModels"
-             x:DataType="local:AddCarViewModel">
+             x:DataType="local:AddCarViewModel"
+             Shell.BackgroundColor="White">
 
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
