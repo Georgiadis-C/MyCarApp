@@ -14,7 +14,7 @@ namespace MyCarApp.ViewModels
     public partial class MaintainDetailsViewModel (ICarMaintainService carMaintainService) : ObservableObject
     {
         [ObservableProperty]
-        CarMaintainModel maintain;
+        CarMaintainModel maintain = new();
         
         [RelayCommand]
         public async Task GoToUpdateMaintain()
@@ -25,6 +25,7 @@ namespace MyCarApp.ViewModels
             });
 
         }
+
         [RelayCommand]
         public async Task DeleteMaintain()
         {

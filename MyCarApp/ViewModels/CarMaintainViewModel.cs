@@ -11,7 +11,7 @@ using MyCarApp.Views;
 
 namespace MyCarApp.ViewModels
 {
-    [QueryProperty(nameof(Maintain), "Maintain")]
+    [QueryProperty(nameof(Car), "Car")]
     public partial class CarMaintainViewModel (ICarMaintainService carMaintainService) : ObservableObject
     {
         [ObservableProperty]
@@ -31,13 +31,13 @@ namespace MyCarApp.ViewModels
         [RelayCommand]
         public async Task GetCarMaintainList()
         {
-            if (Maintain == null) return;
+            if (Car == null) return;
 
             // Παίρνουμε ΟΛΑ τα χιλιόμετρα από τη βάση
             var allMaintains = await carMaintainService.GetCarMaintainList();
 
             // Φιλτράρουμε ώστε να δούμε μόνο αυτά που ανήκουν στο τρέχον αυτοκίνητο
-            var filteredMaintains = allMaintains.Where(x => x.CarId == Maintain.CarId).ToList();
+            var filteredMaintains = allMaintains.Where(x => x.CarId == Car.CarId).ToList();
 
             maintainLogs.Clear();
             foreach (var maintain in filteredMaintains)

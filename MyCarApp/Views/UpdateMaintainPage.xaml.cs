@@ -1,9 +1,12 @@
+using MyCarApp.ViewModels;
+
 namespace MyCarApp.Views;
 
 public partial class UpdateMaintainPage : ContentPage
 {
-	public UpdateMaintainPage()
+	public UpdateMaintainPage(UpdateMaintainViewModel updateMaintainViewModel)
 	{
 		InitializeComponent();
+		BindingContext = updateMaintainViewModel;
 	}
 }

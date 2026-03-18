@@ -4,45 +4,59 @@
              xmlns:viewmodel="clr-namespace:MyCarApp.ViewModels"
              x:DataType="viewmodel:AddMaintainViewModel"
              x:Class="MyCarApp.Views.AddMaintainPage"
-             Title="Προσθήκη Service"
              BackgroundColor="#F5F5F5">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="White" Offset="0.1" />
+            <GradientStop Color="#008080" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
 
     <ScrollView Padding="20">
         <VerticalStackLayout Spacing="15">
 
             <Border StrokeShape="RoundRectangle 10" Padding="15" BackgroundColor="White">
                 <VerticalStackLayout Spacing="10">
-                    <Label Text="Βασικές Πληροφορίες" FontAttributes="Bold" TextColor="Teal" FontSize="16"/>
-                    <BoxView HeightRequest="1" Color="#E0E0E0" Margin="0,5"/>
 
-                    <Label Text="Ημερομηνία" FontSize="12" TextColor="Gray"/>
-                    <DatePicker Date="{Binding Date}" TextColor="Black"/>
+                    <Label Text="Date" FontSize="12" TextColor="Gray"/>
+                    <DatePicker Date="{Binding Service.Date}" TextColor="Black"/>
                 </VerticalStackLayout>
             </Border>
 
             <Border StrokeShape="RoundRectangle 10" Padding="15" BackgroundColor="White">
                 <VerticalStackLayout Spacing="15">
-                    <Label Text="Εργασίες Συντήρησης" FontAttributes="Bold" TextColor="Teal" FontSize="16" Margin="0,0,0,5"/>
+                    <Label Text="Maintenance Work" FontAttributes="Bold" TextColor="Teal" FontSize="16" Margin="0,0,0,5"/>
 
                     <Grid ColumnDefinitions="*, Auto">
-                        <Label Text="Αλλαγή Λαδιών" VerticalOptions="Center" TextColor="Black"/>
-                        <Switch Grid.Column="1" IsChecked="{Binding IsOilChanged}" OnColor="Teal"/>
+                        <Label Text="Oil Change" VerticalOptions="Center" TextColor="Black"/>
+                        <Switch Grid.Column="1" IsToggled="{Binding Service.ChangedOil, Mode=TwoWay}" OnColor="Teal"/>
                     </Grid>
 
                     <Grid ColumnDefinitions="*, Auto">
-                        <Label Text="Αλλαγή Φίλτρων" VerticalOptions="Center" TextColor="Black"/>
-                        <Switch Grid.Column="1" IsChecked="{Binding IsFiltersChanged}" OnColor="Teal"/>
+                        <Label Text="Oil filter change" VerticalOptions="Center" TextColor="Black"/>
+                        <Switch Grid.Column="1" IsToggled="{Binding Service.ChangedOilFilter, Mode=TwoWay}" OnColor="Teal"/>
                     </Grid>
 
                     <Grid ColumnDefinitions="*, Auto">
-                        <Label Text="Έλεγχος Φρένων" VerticalOptions="Center" TextColor="Black"/>
-                        <Switch Grid.Column="1" IsChecked="{Binding IsBrakesChecked}" OnColor="Teal"/>
+                        <Label Text="Air filter change" VerticalOptions="Center" TextColor="Black"/>
+                        <Switch Grid.Column="1" IsToggled="{Binding Service.ChangedAirFilter, Mode=TwoWay}" OnColor="Teal"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label Text="Fuel filter change" VerticalOptions="Center" TextColor="Black"/>
+                        <Switch Grid.Column="1" IsToggled="{Binding Service.ChangedFuelFilter, Mode=TwoWay}" OnColor="Teal"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label Text="Ignition coil change" VerticalOptions="Center" TextColor="Black"/>
+                        <Switch Grid.Column="1" IsToggled="{Binding Service.ChangedIgnitionCoil, Mode=TwoWay}" OnColor="Teal"/>
                     </Grid>
                 </VerticalStackLayout>
             </Border>
 
             <Button Text="ΑΠΟΘΗΚΕΥΣΗ" 
-                    Command="{Binding SaveMaintainCommand}"
+                    Command="{Binding SaveCarMaintainCommand}"
                     BackgroundColor="Teal" 
                     TextColor="White" 
                     CornerRadius="25"

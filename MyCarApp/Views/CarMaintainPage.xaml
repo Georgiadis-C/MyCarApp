@@ -4,8 +4,7 @@
              x:Class="MyCarApp.Views.CarMaintainPage"
              xmlns:viewmodel="clr-namespace:MyCarApp.ViewModels"
              xmlns:model="clr-namespace:MyCarApp.Models"
-             x:DataType="viewmodel:CarMaintainViewModel"
-             Title="CarMaintainPage">
+             x:DataType="viewmodel:CarMaintainViewModel">
 
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">

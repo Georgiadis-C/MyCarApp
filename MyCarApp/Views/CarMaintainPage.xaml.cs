@@ -18,8 +18,6 @@ public partial class CarMaintainPage : ContentPage
 
         if (BindingContext is CarMaintainViewModel vm)
         {
-            // Μην βάζεις await. Το Execute "τρέχει" την εντολή 
-            // και αφήνει το UI να αναπνεύσει.
             vm.GetCarMaintainListCommand.Execute(null);
         }
     }

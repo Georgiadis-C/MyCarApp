@@ -34,7 +34,7 @@
             </VerticalStackLayout>
         </Border>
 
-        <Button Text="Save Changes" 
+        <Button Text="SAVE CHANGES" 
                 Command="{Binding UpdateTripCommand}" 
                 BackgroundColor="#008080" TextColor="White" 
                 CornerRadius="25" HeightRequest="55" FontAttributes="Bold"/>

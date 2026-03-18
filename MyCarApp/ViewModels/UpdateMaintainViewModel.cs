@@ -13,10 +13,10 @@ namespace MyCarApp.ViewModels
     public partial class UpdateMaintainViewModel (ICarMaintainService carMaintainService) : ObservableObject
     {
         [ObservableProperty]
-        CarMaintainModel maintain;
+        CarMaintainModel maintain = new();
 
         [RelayCommand]
-        public async Task UpdateTrip()
+        public async Task UpdateMaintain()
         {
             await Shell.Current.DisplayAlertAsync("Debug", $"Saving maintenance with ID: {Maintain.Id}", "OK");
 
