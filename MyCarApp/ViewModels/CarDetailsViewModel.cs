@@ -36,6 +36,15 @@ namespace MyCarApp.ViewModels
         }
 
         [RelayCommand]
+        public async Task GoToCarMaintain()
+        {
+            await Shell.Current.GoToAsync(nameof(CarMaintainPage), true, new Dictionary<string, object>
+                {
+                     {"Car", Car}
+                 });
+        }
+
+        [RelayCommand]
         public async Task DeleteCar()
         {
             if (Car == null) return;

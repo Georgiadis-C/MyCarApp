@@ -9,16 +9,36 @@ using MyCarApp.Services;
 
 namespace MyCarApp.ViewModels
 {
-    public partial class AddMaintainViewModel (ICarMaintainService carMaintainService) : ObservableObject
+    [QueryProperty(nameof(Car), "Car")]
+
+    public partial class AddMaintainViewModel(ICarMaintainService carMaintainService) : ObservableObject
     {
         [ObservableProperty]
-        CarMaintainModel service;
+        CarsModel car;
+
+        [ObservableProperty]
+        CarMaintainModel service = new()
+        {
+            Date = DateTime.Now
+        };
 
         [RelayCommand]
-        public async Task SaveCar()
+        public async Task SaveCarMaintain()
         {
+
+            if (Car != null)
+            {
+                service.CarId = Car.CarId;
+            }
+
             await carMaintainService.SaveCarMaintain(service);
-            await AppShell.Current.GoToAsync("..");
+
+            service = new CarMaintainModel
+            {
+                Date = DateTime.Now
+            };
+
+            await Shell.Current.GoToAsync("..");
         }
     }
 }

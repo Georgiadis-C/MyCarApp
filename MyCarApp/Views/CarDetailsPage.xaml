@@ -94,6 +94,7 @@
 
                                 <Button Grid.Column="1"
                                         Text="SERVICE"
+                                        Command="{Binding GoToCarMaintainCommand}"
                                         BackgroundColor="Transparent"
                                         TextColor="#008080"
                                         BorderColor="#008080"

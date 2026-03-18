@@ -53,7 +53,7 @@ namespace MyCarApp.ViewModels
         {
             if (carMaintainModel == null) return;
 
-            await Shell.Current.GoToAsync(nameof(MaintainDetailsViewModel), true, new Dictionary<string, object>
+            await Shell.Current.GoToAsync(nameof(MaintainDetailsPage), true, new Dictionary<string, object>
                 {
                     {"Maintain", carMaintainModel}
                 });
@@ -62,7 +62,10 @@ namespace MyCarApp.ViewModels
         [RelayCommand]
         public async Task GoToAddMaintain()
         {
-            await Shell.Current.GoToAsync(nameof(AddMaintainViewModel));
+            await Shell.Current.GoToAsync(nameof(AddMaintainPage), true, new Dictionary<string, object>
+                {
+                    {"Car", Car}
+                });
         }
 
 
