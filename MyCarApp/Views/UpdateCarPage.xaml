@@ -70,6 +70,13 @@
                             </Frame>
                         </VerticalStackLayout>
 
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Fuel Consumption (L/ 100 km)" FontSize="11" FontAttributes="Bold" TextColor="Gray" Margin="5,0"/>
+                            <Frame Padding="15,0" HeightRequest="50" CornerRadius="12" BackgroundColor="#F8F9FA" HasShadow="False" BorderColor="#E0E0E0">
+                                <Entry Text="{Binding Car.FuelConsumption}" TextColor="Black" Keyboard="Numeric" VerticalOptions="Center" />
+                            </Frame>
+                        </VerticalStackLayout>
+
                         <Button Text="SAVE CHANGES" 
                                 Command="{Binding UpdateCarCommand}"
                                 BackgroundColor="#008080" 

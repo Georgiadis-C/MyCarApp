@@ -17,6 +17,7 @@ namespace MyCarApp.Models
         public string Model { get; set; } = string.Empty;
         public int Year { get; set; }
         public int CubicCentimeters { get; set; }
+        public double FuelConsumption { get; set; }
 
     }
 }

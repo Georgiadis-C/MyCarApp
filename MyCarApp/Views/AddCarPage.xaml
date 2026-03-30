@@ -80,6 +80,13 @@
                                Keyboard="Numeric"
                                TextColor="Black"/>
                     </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Fuel Consumption" TextColor="#008080" FontAttributes="Bold" Margin="5,0"/>
+                        <Entry Text="{Binding Car.FuelConsumption}" 
+                               Keyboard="Numeric"
+                               TextColor="Black"/>
+                    </VerticalStackLayout>
                 </VerticalStackLayout>
             </Border>
 

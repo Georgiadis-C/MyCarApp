@@ -12,7 +12,7 @@ using MyCarApp.Views;
 namespace MyCarApp.ViewModels
 {
     [QueryProperty(nameof(Car), "Car")]
-    public partial class CarKmViewModel (ICarKmService carKmService) : ObservableObject
+    public partial class CarKmViewModel(ICarKmService carKmService) : ObservableObject
     {
         [ObservableProperty]
         CarsModel car = new();
@@ -65,7 +65,7 @@ namespace MyCarApp.ViewModels
         {
             await Shell.Current.GoToAsync(nameof(AddTripPage), new Dictionary<string, object>
                 {
-                    { "Car", Car } 
+                    { "Car", Car }
                 });
         }
     }
