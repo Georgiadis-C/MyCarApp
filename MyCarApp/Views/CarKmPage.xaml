@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:local="clr-namespace:MyCarApp.ViewModels"
-             xmlns:models="clr-namespace:MyCarApp.Models"
-             x:DataType="local:CarKmViewModel"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyCarApp.Views.CarKmPage"
-             Shell.BackgroundColor="White">
+             xmlns:vm="clr-namespace:MyCarApp.ViewModels"
+             xmlns:mapsui="clr-namespace:Mapsui.UI.Maui;assembly=Mapsui.UI.Maui"
+             xmlns:models="clr-namespace:MyCarApp.Models"
+             xmlns:behaviors="clr-namespace:MyCarApp.Behaviors"
+             x:DataType="vm:CarKmViewModel">
 
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -13,71 +14,84 @@
             <GradientStop Color="#008080" Offset="1.0" />
         </LinearGradientBrush>
     </ContentPage.Background>
+    <Grid RowDefinitions="Auto, 400, Auto, *" Padding="10" RowSpacing="5">
 
-    <Grid RowDefinitions="Auto, *, Auto">
-        <VerticalStackLayout Grid.Row="0" Padding="25,20">
-            <Label Text="{Binding Car.Brand}" FontSize="28" FontAttributes="Bold" TextColor="#008080"/>
-            <Label Text="Total Kilometers:" TextColor="#666666"/>
-            <Label Text="{Binding TotalKilometers, StringFormat='{0:N1} km'}" 
-                   FontSize="32" 
-                   FontAttributes="Bold" 
-                   TextColor="#008080"/>
+        <VerticalStackLayout Grid.Row="0">
+            <Label Text="{Binding Car.Brand, StringFormat='Car: {0}'}" 
+                   FontSize="18" FontAttributes="Bold" HorizontalOptions="Center"/>
+            <Label Text="{Binding TotalKilometers, StringFormat='Total Kilometers: {0:F2} km'}" 
+                   FontSize="16" TextColor="Gray" HorizontalOptions="Center"/>
         </VerticalStackLayout>
-        
 
-        <CollectionView Grid.Row="1" 
+        <Border Grid.Row="1" 
+                Stroke="#D0D0D0" 
+                StrokeThickness="2" 
+                StrokeShape="RoundRectangle 20"
+                HeightRequest="400" 
+                WidthRequest="400"
+                HorizontalOptions="FillAndExpand" 
+                Padding="0">
+
+            <mapsui:MapView x:Name="MyMap" 
+                Map="{Binding Map}"
+                Info="MyMap_Info" />
+        </Border>
+
+        <Grid Grid.Row="2" ColumnDefinitions="*, Auto, Auto" Margin="0,10" Padding="5">
+            <Label Text="{Binding DistanceResult, StringFormat='Distance: {0}'}"  
+                   Grid.Column="0"
+                   FontSize="18" TextColor="#2196F3" FontAttributes="Bold" 
+                   VerticalOptions="Center"/>
+            <Button Grid.Column="2" Text="Clear" 
+                    Command="{Binding ClearMapCommand}" 
+                    BackgroundColor="#FF5252" TextColor="White" 
+                    CornerRadius="10"/>
+        </Grid>
+
+        <CollectionView Grid.Row="3" 
                         ItemsSource="{Binding KmLogs}" 
-                        SelectionMode="None">
+                        SelectionMode="Single"
+                        SelectionChanged="OnHistorySelectionChanged">
+
+            <CollectionView.Header>
+                <Label Text="Trips History" FontSize="16" FontAttributes="Bold" Margin="10,5"/>
+            </CollectionView.Header>
+
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:CarKmModel">
-                    <Grid Padding="20,5">
-                        <Border BackgroundColor="#008080" Padding="15">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="20"/>
-                            </Border.StrokeShape>
-                            <Border.GestureRecognizers>
-                                <TapGestureRecognizer 
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:CarKmViewModel}}, Path=SelectTripCommand}"
+                <DataTemplate x:DataType="models:CarKmModel" >
+                    <Border Margin="10,5" Padding="15" Stroke="#EEEEEE" StrokeShape="RoundRectangle 10" BackgroundColor="White">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CarKmViewModel}}, Path=ShowRouteFromHistoryCommand}" 
+                                                  CommandParameter="{Binding .}"/>
+                        </Border.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="Auto, *, Auto">
+                            <Label Grid.Column="0" Text="🏁" FontSize="24" VerticalOptions="Center"/>
+
+                            <VerticalStackLayout Grid.Column="1" Margin="15,0,0,0" VerticalOptions="Center">
+                                <Label Text="{Binding StartingPoint, StringFormat='Από: {0}'}" FontAttributes="Bold" FontSize="14"/>
+                                <Label Text="{Binding Destination, StringFormat='Προς: {0}'}" FontAttributes="Bold" FontSize="14"/>
+                                <Label Text="{Binding Date, StringFormat='{0:dd/MM/yyyy HH:mm}'}" FontSize="12" TextColor="Gray"/>
+
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="{Binding Kilometers, StringFormat='{0:F2} km'}" FontSize="13" TextColor="#4CAF50" FontAttributes="Bold"/>
+                                    <Label Text="|" TextColor="LightGray"/>
+                                    <Label Text="{Binding FuelConsumed, StringFormat='{0:F2} L'}" FontSize="13" TextColor="#E91E63" FontAttributes="Bold"/>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+
+                            <Button Grid.Column="2" 
+                                    Text="🗑" 
+                                    BackgroundColor="Transparent" 
+                                    TextColor="Red"
+                                    FontSize="20"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CarKmViewModel}}, Path=DeleteTripCommand}"
                                     CommandParameter="{Binding .}"/>
-                            </Border.GestureRecognizers>
-
-                            <Grid ColumnDefinitions="*, Auto">
-                                <VerticalStackLayout Spacing="2">
-                                    <Label Text="{Binding Date, StringFormat='{0:dd/MM/yyyy}'}" 
-                                           TextColor="#B2DFDB" 
-                                           FontSize="11" 
-                                           FontAttributes="Bold"/>
-
-                                    <HorizontalStackLayout Spacing="5" Margin="0,2">
-                                        <Label Text="{Binding StartingPoint}" 
-                                               TextColor="White" 
-                                               FontSize="16" 
-                                               FontAttributes="Bold"/>
-                                        <Label Text="➔" 
-                                               TextColor="#B2DFDB" 
-                                               VerticalOptions="Center"/>
-                                        <Label Text="{Binding Destination}" 
-                                               TextColor="White" 
-                                               FontSize="16" 
-                                               FontAttributes="Bold"/>
-                                    </HorizontalStackLayout>
-
-                                    <Label Text="{Binding Kilometers, StringFormat='{0:N1} km'}" 
-                                           TextColor="White" 
-                                           FontSize="18" />
-                                </VerticalStackLayout>
-
-                                <Label Grid.Column="1" Text="🏁" VerticalOptions="Center" FontSize="28"/>
-                            </Grid>
-                        </Border>
-                    </Grid>
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Button Grid.Row="2" Text="ADD NEW TRIP"
-                Command="{Binding GoToAddTripCommand}"
-                Margin="25" BackgroundColor="#008080" TextColor="White"
-                CornerRadius="25" HeightRequest="55" FontAttributes="Bold"/>
     </Grid>
 </ContentPage>

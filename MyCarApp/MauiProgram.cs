@@ -3,6 +3,7 @@ using MyCarApp.Interfaces;
 using MyCarApp.Services;
 using MyCarApp.ViewModels;
 using MyCarApp.Views;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace MyCarApp
 {
@@ -13,6 +14,7 @@ namespace MyCarApp
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseSkiaSharp()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -52,6 +54,9 @@ namespace MyCarApp
             builder.Services.AddSingleton<ICarService,CarService>();
             builder.Services.AddSingleton<ICarKmService, CarKmService>();
             builder.Services.AddSingleton<ICarMaintainService, CarMaintainService>();
+            builder.Services.AddSingleton<ICarKmService, CarKmService>();
+            builder.Services.AddSingleton<IMapService, MapService>();
+            builder.Services.AddSingleton<IRoutingService, RoutingService>();
 
 #if DEBUG
             builder.Logging.AddDebug();

@@ -1,3 +1,5 @@
+using Mapsui.Projections;
+using MyCarApp.Models;
 using MyCarApp.ViewModels;
 
 namespace MyCarApp.Views;
@@ -5,11 +7,49 @@ namespace MyCarApp.Views;
 
 public partial class CarKmPage : ContentPage
 {
-	public CarKmPage(CarKmViewModel carKmViewModel)
-	{
-		InitializeComponent();
-		BindingContext = carKmViewModel;
-	}
+    public CarKmPage(CarKmViewModel carKmViewModel)
+    {
+        InitializeComponent();
+        BindingContext = carKmViewModel; }
+
+            private void MyMap_Info(object sender, Mapsui.MapInfoEventArgs e)
+    {
+        // Αν ο χάρτης δεν έχει φορτωθεί ή δεν έχουμε θέση, σταματάμε
+        if (e.WorldPosition == null) return;
+
+        // Μετατροπή των συντεταγμένων του χάρτη σε μοίρες GPS (Lon, Lat)
+        var lonLat = SphericalMercator.ToLonLat(e.WorldPosition.X, e.WorldPosition.Y);
+
+        // Δημιουργία αντικειμένου Location του MAUI
+        var location = new Location(lonLat.lat, lonLat.lon);
+
+        // Κλήση της εντολής στο ViewModel
+        var viewModel = BindingContext as CarKmViewModel;
+        if (viewModel != null && viewModel.AddPointCommand.CanExecute(location))
+        {
+            viewModel.AddPointCommand.Execute(location);
+        }
+    }
+    private async void OnHistorySelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        // Παίρνουμε τη διαδρομή που επιλέχθηκε
+        var selectedRoute = e.CurrentSelection.FirstOrDefault() as CarKmModel;
+
+        if (selectedRoute != null)
+        {
+            var viewModel = BindingContext as CarKmViewModel;
+            if (viewModel != null)
+            {
+                // Καλούμε απευθείας την Command του ViewModel
+                await viewModel.ShowRouteFromHistoryCommand.ExecuteAsync(selectedRoute);
+            }
+
+            // ΚΑΘΑΡΙΣΜΟΣ ΕΠΙΛΟΓΗΣ: 
+            // Ξε-επιλέγουμε το item ώστε να μπορείς να το ξαναπατήσεις αν χρειαστεί
+            ((CollectionView)sender).SelectedItem = null;
+        }
+    }
+
 
     protected override void OnAppearing()
     {
@@ -20,6 +60,7 @@ public partial class CarKmPage : ContentPage
             // Μην βάζεις await. Το Execute "τρέχει" την εντολή 
             // και αφήνει το UI να αναπνεύσει.
             vm.GetCarKmListCommand.Execute(null);
+            vm.ClearMapCommand.Execute(null);
         }
     }
 }

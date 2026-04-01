@@ -19,6 +19,8 @@ namespace MyCarApp.Models
 
         public string Destination { get; set; } = string.Empty;
 
+        public double FuelConsumed { get; set; }
+
         public int CarId { get; set; }
 
         // Αυτό το χρησιμοποιείς στον κώδικά σου (ViewModel/Map)
