@@ -14,7 +14,7 @@ public class RoutingService : IRoutingService
         try
         {
             // OSRM API URL
-            string url = $"https://router.project-osrm.org/route/v1/driving/{start.Longitude.ToString(CultureInfo.InvariantCulture)},{start.Latitude.ToString(CultureInfo.InvariantCulture)};{end.Longitude.ToString(CultureInfo.InvariantCulture)},{end.Latitude.ToString(CultureInfo.InvariantCulture)}?overview=full&geometries=polyline";
+            string url = $"https://routing.openstreetmap.de/routed-car/route/v1/driving/{start.Longitude.ToString(CultureInfo.InvariantCulture)},{start.Latitude.ToString(CultureInfo.InvariantCulture)};{end.Longitude.ToString(CultureInfo.InvariantCulture)},{end.Latitude.ToString(CultureInfo.InvariantCulture)}?overview=full&geometries=polyline";
 
             var response = await _httpClient.GetFromJsonAsync<OsrmResponse>(url);
             if (response?.Routes == null || response.Routes.Count == 0) return (new List<Location>(), 0);
