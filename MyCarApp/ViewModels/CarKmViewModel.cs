@@ -52,7 +52,6 @@ namespace MyCarApp.ViewModels
             Map = _mapService.GetMap();
         }
 
-
         [RelayCommand]
         public async Task GetCarKmList()
         {

@@ -19,6 +19,10 @@ public partial class CarMaintainPage : ContentPage
         if (BindingContext is CarMaintainViewModel vm)
         {
             vm.GetCarMaintainListCommand.Execute(null);
+
+            vm.GetCarMaintainListCommand.ExecuteAsync(null);
+
+            vm.NotifyAboutLastMaintainCommand.ExecuteAsync(null);
         }
     }
 }

@@ -11,6 +11,7 @@ namespace MyCarApp.Models
         public int Id { get; set; }
 
         public bool ChangedOil { get; set; }
+        public double Kilometers { get; set; }
         public bool ChangedOilFilter { get; set; }
         public bool ChangedAirFilter { get; set; }
         public bool ChangedIgnitionCoil { get; set; }

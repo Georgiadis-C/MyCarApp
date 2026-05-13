@@ -4,7 +4,8 @@
              x:Class="MyCarApp.Views.CarMaintainPage"
              xmlns:viewmodel="clr-namespace:MyCarApp.ViewModels"
              xmlns:model="clr-namespace:MyCarApp.Models"
-             x:DataType="viewmodel:CarMaintainViewModel">
+             x:DataType="viewmodel:CarMaintainViewModel"
+             Title="Συντήρηση Αυτοκινήτου">
 
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -15,36 +16,67 @@
 
     <Grid RowDefinitions="Auto, *, Auto" Padding="20">
 
-        <Border Grid.Row="0" 
-            BackgroundColor="Teal" 
-            StrokeShape="RoundRectangle 15"
-            StrokeThickness="0"
-            Margin="0,0,0,20">
-            <Border.Shadow>
-                <Shadow Brush="Black" Offset="2,5" Radius="5" Opacity="0.2"/>
-            </Border.Shadow>
+        <!-- ROW 0: Header & Alerts -->
+        <VerticalStackLayout Grid.Row="0" Spacing="10" Margin="0,0,0,10">
 
-            <VerticalStackLayout Spacing="5" HorizontalOptions="Center" Padding="15">
-                <Label Text="Συνολικά Service" 
-                   TextColor="White" 
-                   FontSize="14" 
-                   HorizontalOptions="Center"/>
-                <Label Text="{Binding TotalMaintains}" 
-                   TextColor="White" 
-                   FontSize="32" 
-                   FontAttributes="Bold" 
-                   HorizontalOptions="Center"/>
-            </VerticalStackLayout>
-        </Border>
+            <!-- Κάρτα Συνολικών Service -->
+            <Border BackgroundColor="Teal" 
+                    StrokeShape="RoundRectangle 15"
+                    StrokeThickness="0">
+                <Border.Shadow>
+                    <Shadow Brush="Black" Offset="2,5" Radius="5" Opacity="0.2"/>
+                </Border.Shadow>
 
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center" Padding="15">
+                    <Label Text="Συνολικά Service" 
+                           TextColor="White" 
+                           FontSize="14" 
+                           HorizontalOptions="Center"/>
+                    <Label Text="{Binding TotalMaintains}" 
+                           TextColor="White" 
+                           FontSize="32" 
+                           FontAttributes="Bold" 
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Μήνυμα Ειδοποίησης Service (Εμφανίζεται μόνο αν RemainingKm <= 2000) -->
+            <Border BackgroundColor="White"
+                    Stroke="#FF4444"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 10"
+                    Padding="10">
+                <Border.Shadow>
+                    <Shadow Brush="Red" Offset="0,2" Radius="3" Opacity="0.1"/>
+                </Border.Shadow>
+
+                <Border.Triggers>
+                    <!-- Κρύβει όλο το Border αν το μήνυμα είναι κενό (δηλ. > 2000χλμ) -->
+                    <DataTrigger TargetType="Border" Binding="{Binding MaintenanceStatusMessage}" Value="">
+                        <Setter Property="IsVisible" Value="True" />
+                    </DataTrigger>
+                </Border.Triggers>
+
+                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Label Text="⚠️" FontSize="18" VerticalOptions="Center"/>
+                    <Label Text="{Binding MaintenanceStatusMessage}" 
+                           TextColor="Red" 
+                           FontAttributes="Bold" 
+                           FontSize="14"
+                           VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+
+        <!-- ROW 1: Λίστα Καταγραφών -->
         <CollectionView Grid.Row="1" 
-                    ItemsSource="{Binding MaintainLogs}"
-                    SelectionMode="None">
+                        ItemsSource="{Binding MaintainLogs}"
+                        SelectionMode="None">
             <CollectionView.EmptyView>
                 <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
                     <Label Text="Δεν βρέθηκαν καταγραφές" 
-                       TextColor="Gray" 
-                       HorizontalOptions="Center" />
+                           TextColor="Gray" 
+                           HorizontalOptions="Center" />
                 </VerticalStackLayout>
             </CollectionView.EmptyView>
 
@@ -52,38 +84,39 @@
                 <DataTemplate x:DataType="model:CarMaintainModel">
                     <Grid Padding="5">
                         <Border StrokeShape="RoundRectangle 10" 
-                            Stroke="#E0E0E0"
-                            StrokeThickness="1"
-                            Padding="10">
+                                Stroke="#E0E0E0"
+                                StrokeThickness="1"
+                                Padding="10"
+                                BackgroundColor="White">
 
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer 
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CarMaintainViewModel}}, Path=SelectMaintainCommand}"
-                                CommandParameter="{Binding .}"/>
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CarMaintainViewModel}}, Path=SelectMaintainCommand}"
+                                    CommandParameter="{Binding .}"/>
                             </Border.GestureRecognizers>
 
                             <HorizontalStackLayout Spacing="15">
                                 <BoxView WidthRequest="5" 
-                                     BackgroundColor="Teal" 
-                                     VerticalOptions="Fill"
-                                     CornerRadius="2"/>
+                                         BackgroundColor="Teal" 
+                                         VerticalOptions="Fill"
+                                         CornerRadius="2"/>
 
                                 <VerticalStackLayout VerticalOptions="Center">
                                     <Label Text="{Binding Date, StringFormat='{0:dd/MM/yyyy}'}" 
-                                       FontAttributes="Bold" 
-                                       FontSize="16" 
-                                       TextColor="Black"/>
+                                           FontAttributes="Bold" 
+                                           FontSize="16" 
+                                           TextColor="Black"/>
                                     <Label Text="{Binding Name}" 
-                                       TextColor="Gray" 
-                                       FontSize="14"/>
+                                           TextColor="Gray" 
+                                           FontSize="14"/>
                                 </VerticalStackLayout>
 
                                 <Label Text="➔" 
-                                   TextColor="Teal"
-                                   FontSize="20"
-                                   HorizontalOptions="EndAndExpand" 
-                                   VerticalOptions="Center"
-                                   Margin="0,0,10,0"/>
+                                       TextColor="Teal"
+                                       FontSize="20"
+                                       HorizontalOptions="EndAndExpand" 
+                                       VerticalOptions="Center"
+                                       Margin="0,0,10,0"/>
                             </HorizontalStackLayout>
                         </Border>
                     </Grid>
@@ -91,16 +124,22 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
+        <!-- ROW 2: Button Προσθήκης -->
         <Button Grid.Row="2" 
-            Text="Προσθήκη Service" 
-            Command="{Binding GoToAddMaintainCommand}"
-            BackgroundColor="Teal"    
-            TextColor="White" 
-            BorderColor="White"
-            BorderWidth="1"
-            CornerRadius="25"
-            HeightRequest="50"
-            FontAttributes="Bold"
-            Margin="0,10,0,0"/>
+                Text="Προσθήκη Service" 
+                Command="{Binding GoToAddMaintainCommand}"
+                BackgroundColor="Teal"    
+                TextColor="White" 
+                BorderColor="White"
+                BorderWidth="1"
+                CornerRadius="25"
+                HeightRequest="50"
+                FontAttributes="Bold"
+                Margin="0,10,0,0">
+            <Button.Shadow>
+                <Shadow Brush="Black" Offset="0,3" Radius="3" Opacity="0.2"/>
+            </Button.Shadow>
+        </Button>
+
     </Grid>
 </ContentPage>
