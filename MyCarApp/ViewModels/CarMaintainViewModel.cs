@@ -16,7 +16,7 @@ namespace MyCarApp.ViewModels
     [QueryProperty(nameof(CarKmModel), "CarKmModel")]
 
     [QueryProperty(nameof(TotalKilometers), "TotalKilometers")]
-    public partial class CarMaintainViewModel (ICarMaintainService carMaintainService, ICarKmService carKmService) : ObservableObject
+    public partial class CarMaintainViewModel (ICarMaintainService carMaintainService, ICarKmService carKmService) : BaseViewModel
     {
 
         [ObservableProperty]
@@ -49,7 +49,7 @@ namespace MyCarApp.ViewModels
 
          public string MaintenanceStatusMessage => RemainingKm switch
          {
-             > 2000 => string.Empty, // Πάνω από 2000 χλμ δεν δείχνουμε τίποτα
+             > 2000 => string.Empty, 
              > 0 => $"The service time is coming! (Remaining {RemainingKm:N0} Km)",
              _ => "WARNING: Your car needs service immediately!"
          }; 
@@ -64,35 +64,34 @@ namespace MyCarApp.ViewModels
         {
             if (Car == null) return;
 
-            // 1. Υπολογισμός Συνολικών Χιλιομέτρων (από το CarKmService)
-            var allTrips = await carKmService.GetCarKmList();
-            TotalKilometers = allTrips
-                .Where(x => x.CarId == Car.CarId)
-                .Sum(x => x.Kilometers);
-
-            // 2. Φέρνουμε τα Maintenance Logs (ΠΡΟΣΟΧΗ: από το carMaintainService)
-            var allMaintains = await carMaintainService.GetCarMaintainList();
-
-            // 3. Εύρεση του πιο πρόσφατου service
-            var lastMaintenance = allMaintains
-                .Where(x => x.CarId == Car.CarId)
-                .OrderByDescending(x => x.Date)
-                .FirstOrDefault();
-
-            if (lastMaintenance != null)
+            await ExecuteAsync(async () =>
             {
-                // 4. Υπολογισμός διαφοράς
-                KmSinceLastMaintain = TotalKilometers - lastMaintenance.Kilometers;
+                var allTrips = await carKmService.GetCarKmList();
+                TotalKilometers = allTrips
+                    .Where(x => x.CarId == Car.CarId)
+                    .Sum(x => x.Kilometers);
 
-            }
-            else
-            {
-                // Αν δεν έχει γίνει ποτέ service
-                KmSinceLastMaintain = TotalKilometers;
-            }
+                var allMaintains = await carMaintainService.GetCarMaintainList();
 
-            OnPropertyChanged(nameof(RemainingKm));
-            OnPropertyChanged(nameof(MaintenanceStatusMessage));
+                var lastMaintenance = allMaintains
+                    .Where(x => x.CarId == Car.CarId)
+                    .OrderByDescending(x => x.Date)
+                    .FirstOrDefault();
+
+                if (lastMaintenance != null)
+                {
+                    KmSinceLastMaintain = TotalKilometers - lastMaintenance.Kilometers;
+
+                }
+                else
+                {
+                    KmSinceLastMaintain = TotalKilometers;
+                }
+
+                OnPropertyChanged(nameof(RemainingKm));
+                OnPropertyChanged(nameof(MaintenanceStatusMessage));
+
+            });
         }
 
         [RelayCommand]
@@ -100,10 +99,8 @@ namespace MyCarApp.ViewModels
         {
             if (Car == null) return;
 
-            // Παίρνουμε ΟΛΑ τα χιλιόμετρα από τη βάση
             var allMaintains = await carMaintainService.GetCarMaintainList();
 
-            // Φιλτράρουμε ώστε να δούμε μόνο αυτά που ανήκουν στο τρέχον αυτοκίνητο
             var filteredMaintains = allMaintains.Where(x => x.CarId == Car.CarId).ToList();
 
             maintainLogs.Clear();

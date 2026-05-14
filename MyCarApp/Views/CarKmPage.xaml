@@ -5,6 +5,7 @@
              xmlns:vm="clr-namespace:MyCarApp.ViewModels"
              xmlns:mapsui="clr-namespace:Mapsui.UI.Maui;assembly=Mapsui.UI.Maui"
              xmlns:models="clr-namespace:MyCarApp.Models"
+             xmlns:components="clr-namespace:MyCarApp.Components"
              xmlns:behaviors="clr-namespace:MyCarApp.Behaviors"
              x:DataType="vm:CarKmViewModel">
 
@@ -92,6 +93,11 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
+        <components:LoadingOverlay Grid.Row="0" 
+        Grid.RowSpan="4" 
+        IsVisible="{Binding IsBusy}" 
+        HorizontalOptions="Fill"
+        VerticalOptions="Fill"
+        BackgroundColor="#AA000000"/>
     </Grid>
 </ContentPage>
