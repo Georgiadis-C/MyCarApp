@@ -14,13 +14,13 @@ public class RoutingService : IRoutingService
         try
         {
             // OSRM API URL
-            string url = $"https://routing.openstreetmap.de/routed-car/route/v1/driving/{start.Longitude.ToString(CultureInfo.InvariantCulture)},{start.Latitude.ToString(CultureInfo.InvariantCulture)};{end.Longitude.ToString(CultureInfo.InvariantCulture)},{end.Latitude.ToString(CultureInfo.InvariantCulture)}?overview=full&geometries=polyline";
+            string url = $"https://routing.openstreetmap.de/routed-car/route/v1/driving/{start.Longitude.ToString(CultureInfo.InvariantCulture)},{start.Latitude.ToString(CultureInfo.InvariantCulture)};{end.Longitude.ToString(CultureInfo.InvariantCulture)},{end.Latitude.ToString(CultureInfo.InvariantCulture)}?overview=simplified&geometries=polyline";
 
             var response = await _httpClient.GetFromJsonAsync<OsrmResponse>(url);
             if (response?.Routes == null || response.Routes.Count == 0) return (new List<Location>(), 0);
 
             // Χρησιμοποιούμε τη δική μας μέθοδο αποκωδικοποίησης παρακάτω
-            var path = DecodePolyline(response.Routes[0].Geometry);
+            var path = await Task.Run(() => DecodePolyline(response.Routes[0].Geometry));
             double distanceKm = response.Routes[0].Distance / 1000.0;
 
             return (path, distanceKm);

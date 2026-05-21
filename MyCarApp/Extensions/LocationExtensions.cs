@@ -81,6 +81,8 @@ public static class LocationExtensions
         double maxResolution = 0;
         map.BackColor = Mapsui.Styles.Color.FromString("#AADAFF");
 
+        bool isUpdating = false;
+
         // 1. ΑΠΕΝΕΡΓΟΠΟΙΗΣΗ ΠΕΡΙΣΤΡΟΦΗΣ ΕΞ ΑΡΧΗΣ
         map.Navigator.RotationLock = true;
 
@@ -102,10 +104,15 @@ public static class LocationExtensions
 
         map.Navigator.ViewportChanged += (s, e) =>
         {
+            
+            if (!isUpdating) return;
+
             // 2. ΣΙΓΟΥΡΙΑ: Αν παρ' όλα αυτά στρίψει, το επαναφέρουμε ακαριαία
             if (map.Navigator.Viewport.Rotation != 0)
             {
+                isUpdating = true;
                 map.Navigator.RotateTo(0);
+                isUpdating = false;
             }
 
             if (maxResolution == 0 && map.Extent != null && map.Navigator.Viewport.Width > 0)
