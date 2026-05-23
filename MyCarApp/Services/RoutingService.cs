@@ -13,15 +13,30 @@ public class RoutingService : IRoutingService
     {
         try
         {
+            var totalSw = System.Diagnostics.Stopwatch.StartNew();
+            var stepSw = System.Diagnostics.Stopwatch.StartNew();
+
             // OSRM API URL
             string url = $"https://routing.openstreetmap.de/routed-car/route/v1/driving/{start.Longitude.ToString(CultureInfo.InvariantCulture)},{start.Latitude.ToString(CultureInfo.InvariantCulture)};{end.Longitude.ToString(CultureInfo.InvariantCulture)},{end.Latitude.ToString(CultureInfo.InvariantCulture)}?overview=simplified&geometries=polyline";
 
             var response = await _httpClient.GetFromJsonAsync<OsrmResponse>(url);
+
+            System.Console.WriteLine("*********************************************************");
+            System.Console.WriteLine("!!! [OSRM] Ξεκινάει το Network Request...");
+
             if (response?.Routes == null || response.Routes.Count == 0) return (new List<Location>(), 0);
+
+            stepSw.Restart();
 
             // Χρησιμοποιούμε τη δική μας μέθοδο αποκωδικοποίησης παρακάτω
             var path = await Task.Run(() => DecodePolyline(response.Routes[0].Geometry));
+
+            System.Diagnostics.Debug.WriteLine($"=== [OSRM] Χρόνος Αποκωδικοποίησης (Decode Time): {stepSw.ElapsedMilliseconds} ms ===");
+
             double distanceKm = response.Routes[0].Distance / 1000.0;
+
+            System.Console.WriteLine($"!!! [OSRM] ΣΥΝΟΛΙΚΟΣ ΧΡΟΝΟΣ: {totalSw.ElapsedMilliseconds} ms");
+            System.Console.WriteLine("*********************************************************");
 
             return (path, distanceKm);
         }

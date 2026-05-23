@@ -10,9 +10,10 @@ public partial class CarKmPage : ContentPage
     public CarKmPage(CarKmViewModel carKmViewModel)
     {
         InitializeComponent();
-        BindingContext = carKmViewModel; }
+        BindingContext = carKmViewModel;
+    }
 
-            private void MyMap_Info(object sender, Mapsui.MapInfoEventArgs e)
+    private void MyMap_Info(object sender, Mapsui.MapInfoEventArgs e)
     {
         // Αν ο χάρτης δεν έχει φορτωθεί ή δεν έχουμε θέση, σταματάμε
         if (e.WorldPosition == null) return;
@@ -51,16 +52,14 @@ public partial class CarKmPage : ContentPage
     }
 
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
 
         if (BindingContext is CarKmViewModel vm)
         {
-            // Μην βάζεις await. Το Execute "τρέχει" την εντολή 
-            // και αφήνει το UI να αναπνεύσει.
-            vm.GetCarKmListCommand.Execute(null);
-            vm.ClearMapCommand.Execute(null);
+            await vm.ClearMapCommand.ExecuteAsync(null);
+            await vm.GetCarKmListCommand.ExecuteAsync(null);
         }
     }
 }

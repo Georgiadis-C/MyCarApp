@@ -10,30 +10,31 @@ namespace MyCarApp.Services
     public class CarService : ICarService
     {
         private SQLiteAsyncConnection _dbConnection;
-        public CarService()
-        {
-            SetUpDB();
-        }
+
 
         private async Task SetUpDB()
         {
-            if (_dbConnection == null)
-            {
-                string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Car.db3");
-                _dbConnection = new SQLiteAsyncConnection(dbPath);
-                await _dbConnection.CreateTableAsync<CarsModel>();
-                await _dbConnection.CreateTableAsync<CarKmModel>();
-            }
+            if (_dbConnection != null)
+                return;
+
+            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Car.db3");
+            _dbConnection = new SQLiteAsyncConnection(dbPath);
+
+            // Με το await εδώ, είμαστε σίγουροι ότι οι πίνακες θα δημιουργηθούν σωστά
+            await _dbConnection.CreateTableAsync<CarsModel>();
+            await _dbConnection.CreateTableAsync<CarKmModel>();
         }
 
         public async Task<List<CarsModel>> GetCarList()
         {
+            await SetUpDB();
             var CarList = await _dbConnection.Table<CarsModel>().ToListAsync();
             return CarList;
         }
 
         public async Task SaveCar(CarsModel carsModel)
         {
+            await SetUpDB();
             if (carsModel.CarId == 0)
             {
                 await _dbConnection.InsertAsync(carsModel);
@@ -46,6 +47,7 @@ namespace MyCarApp.Services
 
         public async Task DeleteCar(CarsModel carsModel)
         {
+            await SetUpDB();
             await _dbConnection.DeleteAsync(carsModel);
         }
     }

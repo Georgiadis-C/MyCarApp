@@ -12,17 +12,15 @@ public partial class CarMaintainPage : ContentPage
         BindingContext = carMaintainViewModel;
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
 
         if (BindingContext is CarMaintainViewModel vm)
         {
-            vm.GetCarMaintainListCommand.Execute(null);
+            await vm.GetCarMaintainListCommand.ExecuteAsync(null);
 
-            vm.GetCarMaintainListCommand.ExecuteAsync(null);
-
-            vm.NotifyAboutLastMaintainCommand.ExecuteAsync(null);
+            await vm.NotifyAboutLastMaintainCommand.ExecuteAsync(null);
         }
     }
 }

@@ -49,7 +49,7 @@ namespace MyCarApp.ViewModels
 
          public string MaintenanceStatusMessage => RemainingKm switch
          {
-             > 2000 => string.Empty, 
+             > 2000 => "You've got plenty of road left. Floor it, Vin Diesel is watching.",
              > 0 => $"The service time is coming! (Remaining {RemainingKm:N0} Km)",
              _ => "WARNING: Your car needs service immediately!"
          }; 

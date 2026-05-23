@@ -6,8 +6,8 @@
              xmlns:mapsui="clr-namespace:Mapsui.UI.Maui;assembly=Mapsui.UI.Maui"
              xmlns:models="clr-namespace:MyCarApp.Models"
              xmlns:components="clr-namespace:MyCarApp.Components"
-             xmlns:behaviors="clr-namespace:MyCarApp.Behaviors"
-             x:DataType="vm:CarKmViewModel">
+             x:DataType="vm:CarKmViewModel"
+             x:Name="thisPage">
 
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -15,6 +15,7 @@
             <GradientStop Color="#008080" Offset="1.0" />
         </LinearGradientBrush>
     </ContentPage.Background>
+
     <Grid RowDefinitions="Auto, 400, Auto, *" Padding="10" RowSpacing="5">
 
         <VerticalStackLayout Grid.Row="0">
@@ -28,14 +29,13 @@
                 Stroke="#D0D0D0" 
                 StrokeThickness="2" 
                 StrokeShape="RoundRectangle 20"
-                HeightRequest="400" 
-                WidthRequest="400"
-                HorizontalOptions="FillAndExpand" 
+                HorizontalOptions="Fill" 
+                VerticalOptions="Fill"
                 Padding="0">
 
             <mapsui:MapView x:Name="MyMap" 
-                Map="{Binding Map}"
-                Info="MyMap_Info" />
+                            Map="{Binding Map}"
+                            Info="MyMap_Info" />
         </Border>
 
         <Grid Grid.Row="2" ColumnDefinitions="*, Auto, Auto" Margin="0,10" Padding="5">
@@ -62,7 +62,7 @@
                 <DataTemplate x:DataType="models:CarKmModel" >
                     <Border Margin="10,5" Padding="15" Stroke="#EEEEEE" StrokeShape="RoundRectangle 10" BackgroundColor="White">
                         <Border.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CarKmViewModel}}, Path=ShowRouteFromHistoryCommand}" 
+                            <TapGestureRecognizer Command="{Binding BindingContext.ShowRouteFromHistoryCommand, Source={x:Reference thisPage}}" 
                                                   CommandParameter="{Binding .}"/>
                         </Border.GestureRecognizers>
 
@@ -86,18 +86,19 @@
                                     BackgroundColor="Transparent" 
                                     TextColor="Red"
                                     FontSize="20"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CarKmViewModel}}, Path=DeleteTripCommand}"
+                                    Command="{Binding BindingContext.DeleteTripCommand, Source={x:Reference thisPage}}"
                                     CommandParameter="{Binding .}"/>
                         </Grid>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
         <components:LoadingOverlay Grid.Row="0" 
-        Grid.RowSpan="4" 
-        IsVisible="{Binding IsBusy}" 
-        HorizontalOptions="Fill"
-        VerticalOptions="Fill"
-        BackgroundColor="#AA000000"/>
+                                   Grid.RowSpan="4" 
+                                   IsVisible="{Binding IsBusy}" 
+                                   HorizontalOptions="Fill"
+                                   VerticalOptions="Fill"
+                                   BackgroundColor="#AA000000"/>
     </Grid>
 </ContentPage>

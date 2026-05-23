@@ -6,7 +6,7 @@
              xmlns:model="clr-namespace:MyCarApp.Models"
              xmlns:components="clr-namespace:MyCarApp.Components"
              x:DataType="viewmodel:CarMaintainViewModel"
-             Title="Συντήρηση Αυτοκινήτου">
+             Title="Car Maintenance">
 
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -70,7 +70,7 @@
                         SelectionMode="None">
             <CollectionView.EmptyView>
                 <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
-                    <Label Text="Δεν βρέθηκαν καταγραφές" 
+                    <Label Text="No Records Found" 
                            TextColor="Gray" 
                            HorizontalOptions="Center" />
                 </VerticalStackLayout>

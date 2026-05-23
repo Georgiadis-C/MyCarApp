@@ -45,7 +45,7 @@
                     <VerticalStackLayout Spacing="5">
                         <Label Text="Brand" TextColor="#008080" FontAttributes="Bold" Margin="5,0"/>
                         <Entry Text="{Binding Car.Brand}" 
-                               Placeholder="π.χ. Toyota"
+                               Placeholder="e.g. Toyota"
                                TextColor="Black"
                                PlaceholderColor="#A0A0A0"/>
                     </VerticalStackLayout>
@@ -53,14 +53,14 @@
                     <VerticalStackLayout Spacing="5">
                         <Label Text="Model" TextColor="#008080" FontAttributes="Bold" Margin="5,0"/>
                         <Entry Text="{Binding Car.Model}" 
-                               Placeholder="π.χ. Corolla"
+                               Placeholder="e.g. Corolla"
                                TextColor="Black"/>
                     </VerticalStackLayout>
 
                     <VerticalStackLayout Spacing="5">
                         <Label Text="Year" TextColor="#008080" FontAttributes="Bold" Margin="5,0"/>
                         <Entry Text="{Binding Car.Year}" 
-                               Placeholder="π.χ. 2022"
+                               Placeholder="e.g. 2022"
                                Keyboard="Numeric"
                                TextColor="Black"/>
                     </VerticalStackLayout>
@@ -68,7 +68,7 @@
                     <VerticalStackLayout Spacing="5">
                         <Label Text="Horsepower" TextColor="#008080" FontAttributes="Bold" Margin="5,0"/>
                         <Entry Text="{Binding Car.Horsepower}" 
-                               Placeholder="π.χ. 2022"
+                               Placeholder="e.g. 200"
                                Keyboard="Numeric"
                                TextColor="Black"/>
                     </VerticalStackLayout>
@@ -76,7 +76,7 @@
                     <VerticalStackLayout Spacing="5">
                         <Label Text="Cubic Centimeters" TextColor="#008080" FontAttributes="Bold" Margin="5,0"/>
                         <Entry Text="{Binding Car.CubicCentimeters}" 
-                               Placeholder="π.χ. 2022"
+                               Placeholder="e.g. 2000"
                                Keyboard="Numeric"
                                TextColor="Black"/>
                     </VerticalStackLayout>
@@ -84,6 +84,7 @@
                     <VerticalStackLayout Spacing="5">
                         <Label Text="Fuel Consumption" TextColor="#008080" FontAttributes="Bold" Margin="5,0"/>
                         <Entry Text="{Binding Car.FuelConsumption}" 
+                               Placeholder="e.g. 7.2"
                                Keyboard="Numeric"
                                TextColor="Black"/>
                     </VerticalStackLayout>

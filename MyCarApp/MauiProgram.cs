@@ -22,25 +22,25 @@ namespace MyCarApp
                 });
 
             // ViewModels
-            builder.Services.AddSingleton<CarKmViewModel>();
-            builder.Services.AddSingleton<CarMaintainViewModel>();
-            builder.Services.AddSingleton<CarsViewModel>();
-            builder.Services.AddSingleton<AddCarViewModel>();
-            builder.Services.AddSingleton<CarDetailsViewModel>();
+            builder.Services.AddTransient<CarKmViewModel>();
+            builder.Services.AddTransient<CarMaintainViewModel>();
+            builder.Services.AddTransient<CarsViewModel>();
+            builder.Services.AddTransient<AddCarViewModel>();
+            builder.Services.AddTransient<CarDetailsViewModel>();
             builder.Services.AddTransient<UpdateCarPageViewModel>();
             builder.Services.AddTransient<AddTripViewModel>();
             builder.Services.AddTransient<TripDetailsViewModel>();
             builder.Services.AddTransient<UpdateTripViewModel>();
-            builder.Services.AddSingleton<AddMaintainViewModel>();
-            builder.Services.AddSingleton<MaintainDetailsViewModel>();
-            builder.Services.AddSingleton<UpdateMaintainViewModel>();
+            builder.Services.AddTransient<AddMaintainViewModel>();
+            builder.Services.AddTransient<MaintainDetailsViewModel>();
+            builder.Services.AddTransient<UpdateMaintainViewModel>();
 
             // Views
-            builder.Services.AddSingleton<CarKmPage>();
-            builder.Services.AddSingleton<CarMaintainPage>();
-            builder.Services.AddSingleton<CarsPage>();
-            builder.Services.AddSingleton<AddCarPage>();
-            builder.Services.AddSingleton<CarDetailsPage>();
+            builder.Services.AddTransient<CarKmPage>();
+            builder.Services.AddTransient<CarMaintainPage>();
+            builder.Services.AddTransient<CarsPage>();
+            builder.Services.AddTransient<AddCarPage>();
+            builder.Services.AddTransient<CarDetailsPage>();
             builder.Services.AddTransient<UpdateCarPage>();
             builder.Services.AddTransient<AddTripPage>();
             builder.Services.AddTransient<TripDetailsPage>();
@@ -54,8 +54,7 @@ namespace MyCarApp
             builder.Services.AddSingleton<ICarService,CarService>();
             builder.Services.AddSingleton<ICarKmService, CarKmService>();
             builder.Services.AddSingleton<ICarMaintainService, CarMaintainService>();
-            builder.Services.AddSingleton<ICarKmService, CarKmService>();
-            builder.Services.AddSingleton<IMapService, MapService>();
+            builder.Services.AddTransient<IMapService, MapService>();
             builder.Services.AddSingleton<IRoutingService, RoutingService>();
 
 #if DEBUG
