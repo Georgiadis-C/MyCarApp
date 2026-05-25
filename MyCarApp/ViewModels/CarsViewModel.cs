@@ -12,7 +12,6 @@ namespace MyCarApp.ViewModels
 {
     public partial class CarsViewModel(ICarService _carService) : ObservableObject
     {
-
         public ObservableCollection<CarsModel> Cars { get; set; } = new ObservableCollection<CarsModel>();
 
         [RelayCommand]

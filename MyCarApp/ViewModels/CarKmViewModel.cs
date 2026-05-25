@@ -104,7 +104,7 @@ namespace MyCarApp.ViewModels
                     _mapService.AddLine(path);
                     DistanceResult = $"{distance:F2} km";
 
-                    double consumed = (distance * Car.FuelConsumption) / 100;
+                    double consumed = (distance * (Car.FuelConsumption ?? 0.0)) / 100;
 
                     Trip.Kilometers = distance;
                     Trip.Path = path;
