@@ -74,7 +74,6 @@ namespace MyCarApp.ViewModels
             });
         }
 
-
         [RelayCommand]
         private async Task AddPoint(Location location)
         {
@@ -133,7 +132,6 @@ namespace MyCarApp.ViewModels
             }
         }
 
-
         [RelayCommand]
         private async Task ClearMap()
         {
@@ -144,7 +142,6 @@ namespace MyCarApp.ViewModels
             _mapService.ClearMap();
             Map.RefreshGraphics();
         }
-
 
         [RelayCommand]
         private async Task ShowRouteFromHistory(CarKmModel selectedTrip)

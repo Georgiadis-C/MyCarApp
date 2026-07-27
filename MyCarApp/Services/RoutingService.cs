@@ -28,7 +28,6 @@ public class RoutingService : IRoutingService
 
             stepSw.Restart();
 
-            // Χρησιμοποιούμε τη δική μας μέθοδο αποκωδικοποίησης παρακάτω
             var path = await Task.Run(() => DecodePolyline(response.Routes[0].Geometry));
 
             System.Diagnostics.Debug.WriteLine($"=== [OSRM] Χρόνος Αποκωδικοποίησης (Decode Time): {stepSw.ElapsedMilliseconds} ms ===");
@@ -43,7 +42,6 @@ public class RoutingService : IRoutingService
         catch { return (new List<Location>(), 0); }
     }
 
-    // Αλγόριθμος της Google για Polyline (δουλεύει παντού χωρίς NuGet)
     private List<Location> DecodePolyline(string encodedPoints)
     {
         if (string.IsNullOrEmpty(encodedPoints)) return new List<Location>();

@@ -5,8 +5,7 @@
              xmlns:viewmodel="clr-namespace:MyCarApp.ViewModels"
              xmlns:model="clr-namespace:MyCarApp.Models"
              xmlns:components="clr-namespace:MyCarApp.Components"
-             x:DataType="viewmodel:CarMaintainViewModel"
-             Title="Car Maintenance">
+             x:DataType="viewmodel:CarMaintainViewModel">
 
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -27,7 +26,7 @@
                 </Border.Shadow>
 
                 <VerticalStackLayout Spacing="5" HorizontalOptions="Center" Padding="15">
-                    <Label Text="Συνολικά Service" 
+                    <Label Text="Total Services" 
                            TextColor="White" 
                            FontSize="14" 
                            HorizontalOptions="Center"/>
@@ -121,7 +120,7 @@
         </CollectionView>
 
         <Button Grid.Row="2" 
-                Text="Προσθήκη Service" 
+                Text="ADD SERVICE" 
                 Command="{Binding GoToAddMaintainCommand}"
                 BackgroundColor="Teal"    
                 TextColor="White" 

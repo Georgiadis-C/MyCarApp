@@ -55,7 +55,7 @@
                 </VerticalStackLayout>
             </Border>
 
-            <Button Text="ΑΠΟΘΗΚΕΥΣΗ" 
+            <Button Text="SAVE" 
                     Command="{Binding SaveCarMaintainCommand}"
                     BackgroundColor="Teal" 
                     TextColor="White" 

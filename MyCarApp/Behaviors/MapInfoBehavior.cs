@@ -16,31 +16,28 @@ public class MapInfoBehavior : Behavior<MapControl>
         set => SetValue(MapInfoCommandProperty, value);
     }
 
+    // Attaches the info event handler to the map control
     protected override void OnAttachedTo(MapControl bindable)
     {
         base.OnAttachedTo(bindable);
-        // Χρησιμοποιούμε το Info event που είναι το πιο σταθερό
         bindable.Info += OnInfo;
     }
 
+    // Detaches the info event handler from the map control
     protected override void OnDetachingFrom(MapControl bindable)
     {
         bindable.Info -= OnInfo;
         base.OnDetachingFrom(bindable);
     }
 
+    // Handles map click info events and triggers the command with location data
     private void OnInfo(object sender, Mapsui.MapInfoEventArgs e)
     {
-        // Αν το WorldPosition είναι null, το κλικ δεν καταγράφηκε σωστά
         if (e.WorldPosition == null) return;
 
-        // Μετατροπή από SphericalMercator σε Lon/Lat
         var (lon, lat) = Mapsui.Projections.SphericalMercator.ToLonLat(e.WorldPosition.X, e.WorldPosition.Y);
-
-        // Δημιουργία του Location για το MAUI
         var location = new Microsoft.Maui.Devices.Sensors.Location(lat, lon);
 
-        // ΕΛΕΓΧΟΣ: Εδώ στέλνουμε το κλικ στο ViewModel
         if (MapInfoCommand != null && MapInfoCommand.CanExecute(location))
         {
             MapInfoCommand.Execute(location);

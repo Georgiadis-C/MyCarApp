@@ -14,11 +14,6 @@ namespace MyCarApp
             TaskScheduler.UnobservedTaskException += OnUnobservedTaskException;
                     }
 
-      // protected override Window CreateWindow(IActivationState? activationState)
-       // {
-          //  return new Window(new AppShell());
-       // }
-
         private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             var ex = e.ExceptionObject as Exception;

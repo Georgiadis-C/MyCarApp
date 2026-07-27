@@ -71,15 +71,15 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
-		<PackageReference Include="Mapsui.Maui" Version="5.0.2" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.51" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.5" />
+		<PackageReference Include="Mapsui.Maui" Version="5.1.0" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.90" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.10" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.11.285" />
 		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.11" />
-		<PackageReference Include="SQLitePCLRaw.core" Version="3.0.2" />
-		<PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="3.0.2" />
-		<PackageReference Include="SQLitePCLRaw.provider.e_sqlite3" Version="3.0.2" />
+		<PackageReference Include="SQLitePCLRaw.core" Version="3.0.5" />
+		<PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="3.0.5" />
+		<PackageReference Include="SQLitePCLRaw.provider.e_sqlite3" Version="3.0.5" />
 	</ItemGroup>
 
 	<ItemGroup>

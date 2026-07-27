@@ -23,12 +23,10 @@ namespace MyCarApp.Models
 
         public int CarId { get; set; }
 
-        // Αυτό το χρησιμοποιείς στον κώδικά σου (ViewModel/Map)
         // Το [Ignore] λέει στην SQLite: "Μην το κοιτάς αυτό, δεν μπορείς να το σώσεις"
         [Ignore]
         public List<Location> Path { get; set; }
 
-        // Αυτό είναι το "κρυφό" πεδίο που σώζει η SQLite
         // Κάνει αυτόματα τη μετατροπή από Λίστα σε String και το αντίστροφο
         public string PathData
         {

@@ -8,7 +8,6 @@ namespace MyCarApp.Interfaces
     public interface ICarService
     {
         Task<List<CarsModel>> GetCarList();
-
         Task SaveCar(CarsModel carModel);
         Task DeleteCar(CarsModel carModel);
     }
